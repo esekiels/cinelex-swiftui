@@ -1,0 +1,721 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF482C262E1A186D003462C1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = BF482C252E1A186D003462C1 /* Alamofire */; };
+		BF482C2A2E1A18CE003462C1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BF482C292E1A18CE003462C1 /* Kingfisher */; };
+		BF482C2D2E1A18E3003462C1 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = BF482C2C2E1A18E3003462C1 /* Swinject */; };
+		BF482C992E1A2A15003462C1 /* Feature in Frameworks */ = {isa = PBXBuildFile; productRef = BF482C982E1A2A15003462C1 /* Feature */; };
+		BF482C9B2E1A2A19003462C1 /* Base in Frameworks */ = {isa = PBXBuildFile; productRef = BF482C9A2E1A2A19003462C1 /* Base */; };
+		BF482C9D2E1A2A1F003462C1 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = BF482C9C2E1A2A1F003462C1 /* Data */; };
+		BF482C9F2E1A2A24003462C1 /* Database in Frameworks */ = {isa = PBXBuildFile; productRef = BF482C9E2E1A2A24003462C1 /* Database */; };
+		BF482CA12E1A2A2A003462C1 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = BF482CA02E1A2A2A003462C1 /* Model */; };
+		BF482CA32E1A2A2F003462C1 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = BF482CA22E1A2A2F003462C1 /* Network */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BF1406742E1A164A00B7D174 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF1406592E1A164900B7D174 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF1406602E1A164900B7D174;
+			remoteInfo = Cinelex;
+		};
+		BF14067E2E1A164A00B7D174 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF1406592E1A164900B7D174 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF1406602E1A164900B7D174;
+			remoteInfo = Cinelex;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BF1406612E1A164900B7D174 /* Cinelex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cinelex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF1406732E1A164A00B7D174 /* CinelexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CinelexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF14067D2E1A164A00B7D174 /* CinelexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CinelexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF482C052E1A16AB003462C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Base; sourceTree = "<group>"; };
+		BF482C062E1A16B3003462C1 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
+		BF482C072E1A16BD003462C1 /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Database; sourceTree = "<group>"; };
+		BF482C082E1A16C6003462C1 /* Feature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Feature; sourceTree = "<group>"; };
+		BF482C092E1A16CC003462C1 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Model; sourceTree = "<group>"; };
+		BF482C0A2E1A16D1003462C1 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BF1406632E1A164900B7D174 /* Cinelex */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Cinelex;
+			sourceTree = "<group>";
+		};
+		BF1406762E1A164A00B7D174 /* CinelexTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CinelexTests;
+			sourceTree = "<group>";
+		};
+		BF1406802E1A164A00B7D174 /* CinelexUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CinelexUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF14065E2E1A164900B7D174 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF482CA32E1A2A2F003462C1 /* Network in Frameworks */,
+				BF482C2A2E1A18CE003462C1 /* Kingfisher in Frameworks */,
+				BF482C262E1A186D003462C1 /* Alamofire in Frameworks */,
+				BF482C9F2E1A2A24003462C1 /* Database in Frameworks */,
+				BF482C9D2E1A2A1F003462C1 /* Data in Frameworks */,
+				BF482C2D2E1A18E3003462C1 /* Swinject in Frameworks */,
+				BF482C992E1A2A15003462C1 /* Feature in Frameworks */,
+				BF482CA12E1A2A2A003462C1 /* Model in Frameworks */,
+				BF482C9B2E1A2A19003462C1 /* Base in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF1406702E1A164A00B7D174 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF14067A2E1A164A00B7D174 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF1406582E1A164900B7D174 = {
+			isa = PBXGroup;
+			children = (
+				BF482C0A2E1A16D1003462C1 /* Network */,
+				BF482C092E1A16CC003462C1 /* Model */,
+				BF482C082E1A16C6003462C1 /* Feature */,
+				BF482C072E1A16BD003462C1 /* Database */,
+				BF482C062E1A16B3003462C1 /* Data */,
+				BF482C052E1A16AB003462C1 /* Base */,
+				BF1406632E1A164900B7D174 /* Cinelex */,
+				BF1406762E1A164A00B7D174 /* CinelexTests */,
+				BF1406802E1A164A00B7D174 /* CinelexUITests */,
+				BF482C972E1A2A15003462C1 /* Frameworks */,
+				BF1406622E1A164900B7D174 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF1406622E1A164900B7D174 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF1406612E1A164900B7D174 /* Cinelex.app */,
+				BF1406732E1A164A00B7D174 /* CinelexTests.xctest */,
+				BF14067D2E1A164A00B7D174 /* CinelexUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF482C972E1A2A15003462C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF1406602E1A164900B7D174 /* Cinelex */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF1406872E1A164A00B7D174 /* Build configuration list for PBXNativeTarget "Cinelex" */;
+			buildPhases = (
+				BF14065D2E1A164900B7D174 /* Sources */,
+				BF14065E2E1A164900B7D174 /* Frameworks */,
+				BF14065F2E1A164900B7D174 /* Resources */,
+				BF482C852E1A1B8E003462C1 /* SwiftLint Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BF1406632E1A164900B7D174 /* Cinelex */,
+			);
+			name = Cinelex;
+			packageProductDependencies = (
+				BF482C252E1A186D003462C1 /* Alamofire */,
+				BF482C292E1A18CE003462C1 /* Kingfisher */,
+				BF482C2C2E1A18E3003462C1 /* Swinject */,
+				BF482C982E1A2A15003462C1 /* Feature */,
+				BF482C9A2E1A2A19003462C1 /* Base */,
+				BF482C9C2E1A2A1F003462C1 /* Data */,
+				BF482C9E2E1A2A24003462C1 /* Database */,
+				BF482CA02E1A2A2A003462C1 /* Model */,
+				BF482CA22E1A2A2F003462C1 /* Network */,
+			);
+			productName = Cinelex;
+			productReference = BF1406612E1A164900B7D174 /* Cinelex.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BF1406722E1A164A00B7D174 /* CinelexTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF14068A2E1A164A00B7D174 /* Build configuration list for PBXNativeTarget "CinelexTests" */;
+			buildPhases = (
+				BF14066F2E1A164A00B7D174 /* Sources */,
+				BF1406702E1A164A00B7D174 /* Frameworks */,
+				BF1406712E1A164A00B7D174 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF1406752E1A164A00B7D174 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BF1406762E1A164A00B7D174 /* CinelexTests */,
+			);
+			name = CinelexTests;
+			packageProductDependencies = (
+			);
+			productName = CinelexTests;
+			productReference = BF1406732E1A164A00B7D174 /* CinelexTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BF14067C2E1A164A00B7D174 /* CinelexUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF14068D2E1A164A00B7D174 /* Build configuration list for PBXNativeTarget "CinelexUITests" */;
+			buildPhases = (
+				BF1406792E1A164A00B7D174 /* Sources */,
+				BF14067A2E1A164A00B7D174 /* Frameworks */,
+				BF14067B2E1A164A00B7D174 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF14067F2E1A164A00B7D174 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BF1406802E1A164A00B7D174 /* CinelexUITests */,
+			);
+			name = CinelexUITests;
+			packageProductDependencies = (
+			);
+			productName = CinelexUITests;
+			productReference = BF14067D2E1A164A00B7D174 /* CinelexUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF1406592E1A164900B7D174 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					BF1406602E1A164900B7D174 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					BF1406722E1A164A00B7D174 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = BF1406602E1A164900B7D174;
+					};
+					BF14067C2E1A164A00B7D174 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = BF1406602E1A164900B7D174;
+					};
+				};
+			};
+			buildConfigurationList = BF14065C2E1A164900B7D174 /* Build configuration list for PBXProject "Cinelex" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BF1406582E1A164900B7D174;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BF482C242E1A186C003462C1 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				BF482C272E1A187D003462C1 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				BF482C282E1A18CE003462C1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				BF482C2B2E1A18E3003462C1 /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BF1406622E1A164900B7D174 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF1406602E1A164900B7D174 /* Cinelex */,
+				BF1406722E1A164A00B7D174 /* CinelexTests */,
+				BF14067C2E1A164A00B7D174 /* CinelexUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF14065F2E1A164900B7D174 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF1406712E1A164A00B7D174 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF14067B2E1A164A00B7D174 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BF482C852E1A1B8E003462C1 /* SwiftLint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF14065D2E1A164900B7D174 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF14066F2E1A164A00B7D174 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF1406792E1A164A00B7D174 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF1406752E1A164A00B7D174 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF1406602E1A164900B7D174 /* Cinelex */;
+			targetProxy = BF1406742E1A164A00B7D174 /* PBXContainerItemProxy */;
+		};
+		BF14067F2E1A164A00B7D174 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF1406602E1A164900B7D174 /* Cinelex */;
+			targetProxy = BF14067E2E1A164A00B7D174 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BF1406852E1A164A00B7D174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BF1406862E1A164A00B7D174 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BF1406882E1A164A00B7D174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Cinelex/Preview Content\"";
+				DEVELOPMENT_TEAM = W3UM55KY7Y;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.esekiels.Cinelex;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BF1406892E1A164A00B7D174 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Cinelex/Preview Content\"";
+				DEVELOPMENT_TEAM = W3UM55KY7Y;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.esekiels.Cinelex;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BF14068B2E1A164A00B7D174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W3UM55KY7Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.esekiels.CinelexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cinelex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Cinelex";
+			};
+			name = Debug;
+		};
+		BF14068C2E1A164A00B7D174 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W3UM55KY7Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.esekiels.CinelexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cinelex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Cinelex";
+			};
+			name = Release;
+		};
+		BF14068E2E1A164A00B7D174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W3UM55KY7Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.esekiels.CinelexUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cinelex;
+			};
+			name = Debug;
+		};
+		BF14068F2E1A164A00B7D174 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W3UM55KY7Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.esekiels.CinelexUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cinelex;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF14065C2E1A164900B7D174 /* Build configuration list for PBXProject "Cinelex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF1406852E1A164A00B7D174 /* Debug */,
+				BF1406862E1A164A00B7D174 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF1406872E1A164A00B7D174 /* Build configuration list for PBXNativeTarget "Cinelex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF1406882E1A164A00B7D174 /* Debug */,
+				BF1406892E1A164A00B7D174 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF14068A2E1A164A00B7D174 /* Build configuration list for PBXNativeTarget "CinelexTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF14068B2E1A164A00B7D174 /* Debug */,
+				BF14068C2E1A164A00B7D174 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF14068D2E1A164A00B7D174 /* Build configuration list for PBXNativeTarget "CinelexUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF14068E2E1A164A00B7D174 /* Debug */,
+				BF14068F2E1A164A00B7D174 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BF482C242E1A186C003462C1 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		BF482C272E1A187D003462C1 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.59.1;
+			};
+		};
+		BF482C282E1A18CE003462C1 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.4.0;
+			};
+		};
+		BF482C2B2E1A18E3003462C1 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BF482C252E1A186D003462C1 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF482C242E1A186C003462C1 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		BF482C292E1A18CE003462C1 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF482C282E1A18CE003462C1 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		BF482C2C2E1A18E3003462C1 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF482C2B2E1A18E3003462C1 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		BF482C982E1A2A15003462C1 /* Feature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Feature;
+		};
+		BF482C9A2E1A2A19003462C1 /* Base */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Base;
+		};
+		BF482C9C2E1A2A1F003462C1 /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
+		BF482C9E2E1A2A24003462C1 /* Database */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Database;
+		};
+		BF482CA02E1A2A2A003462C1 /* Model */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Model;
+		};
+		BF482CA22E1A2A2F003462C1 /* Network */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Network;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BF1406592E1A164900B7D174 /* Project object */;
+}
