@@ -11,11 +11,22 @@ public struct CinelexView: View {
     
     // MARK: - Properties
     
+    @StateObject private var navigation = CinelexNavigation()
+    
     public init() { }
     
     // MARK: - Views
     
     public var body: some View {
-        Text("CinelexView")
+        NavigationStack(path: $navigation.path) {
+            CinelexListView()
+                .environmentObject(navigation)
+                .navigationDestination(for: CinelexNavigation.Route.self) { route in
+                    switch route {
+                    case .detail:
+                        EmptyView()
+                    }
+                }
+        }
     }
 }

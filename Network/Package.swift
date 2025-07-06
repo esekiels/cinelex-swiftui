@@ -7,17 +7,28 @@ let package = Package(
     name: "Network",
     platforms: [
         .iOS(.v16)
-       ],
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "Network",
             targets: ["Network"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.10.2")),
+        .package(name: "Base", path: "../Base"),
+        .package(name: "Model", path: "../Model")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Network")
+            name: "Network",
+            dependencies: [
+                .product(name: "Alamofire", package: "Alamofire"),
+                .product(name: "Base", package: "Base"),
+                .product(name: "Model", package: "Model")
+            ]
+        )
     ]
 )
