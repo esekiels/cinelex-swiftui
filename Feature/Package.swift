@@ -9,15 +9,24 @@ let package = Package(
         .iOS(.v16)
        ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "Feature",
             targets: ["Feature"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "8.0.0")),
+        .package(name: "Model", path: "../Model"),
+        .package(name: "Data", path: "../Data"),
+        .package(name: "Base", path: "../Base")
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Feature")
+            name: "Feature",
+            dependencies: [
+                .product(name: "Kingfisher", package: "Kingfisher"),
+                .product(name: "Model", package: "Model"),
+                .product(name: "Data", package: "Data"),
+                .product(name: "Base", package: "Base")
+            ])
     ]
 )

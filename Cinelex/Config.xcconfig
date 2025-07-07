@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  Cinelex
+//
+//  Created by Esekiel Surbakti on 06/07/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+BASE_URL = https:/$()/api.themoviedb.org/3
+TOKEN = eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTQ2YmU1OWQwYWQwNTFhYzNmY2FjOGE4ODY4NjNlZiIsIm5iZiI6MTU2MTI3MjQxNC4zMzMsInN1YiI6IjVkMGYyMDVlMGUwYTI2MTA5MmNjMTY3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TfrjkpxcqPC9PU9tj0oMjXUnJZhsW0eIACfYUpUr3fI

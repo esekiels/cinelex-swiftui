@@ -51,7 +51,6 @@ public struct SplashView: View {
                     .opacity(isVisible ? 1.0 : 0.0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black.ignoresSafeArea())
         }
     }
 }
