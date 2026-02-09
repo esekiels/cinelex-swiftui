@@ -11,9 +11,15 @@ let package = Package(
             targets: ["Network"]
         )
     ],
+    dependencies: [
+        .package(path: "../../Core/Common")
+    ],
     targets: [
         .target(
-            name: "Network"
+            name: "Network",
+            dependencies: [
+                .product(name: "Common", package: "Common")
+            ]
         )
     ]
 )
