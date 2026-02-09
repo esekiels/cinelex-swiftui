@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import Common
+import Design
 
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
+            Image.module("Cinelex")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text(LocalizeConstant.app)
         }
         .padding()
     }

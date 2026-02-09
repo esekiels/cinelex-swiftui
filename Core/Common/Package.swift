@@ -12,7 +12,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Common"
+            name: "Common",
+            resources: [
+                .process("Resource")
+            ]
         ),
 
     ]

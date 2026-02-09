@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BFDDD33D2F39D6960040B38B /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = BFDDD33C2F39D6960040B38B /* Common */; };
+		BFDDD3412F39DD640040B38B /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = BFDDD3402F39DD640040B38B /* Design */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		BF2396A22F39B02C0085016E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -37,9 +42,22 @@
 		BF23970B2F39B4540085016E /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = Core/Data; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BFDDD33F2F39D7CB0040B38B /* Exceptions for "Cinelex" folder in "Cinelex" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BF2396932F39B02A0085016E /* Cinelex */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BF2396962F39B02A0085016E /* Cinelex */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BFDDD33F2F39D7CB0040B38B /* Exceptions for "Cinelex" folder in "Cinelex" target */,
+			);
 			path = Cinelex;
 			sourceTree = "<group>";
 		};
@@ -60,6 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDDD3412F39DD640040B38B /* Design in Frameworks */,
+				BFDDD33D2F39D6960040B38B /* Common in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +178,8 @@
 			);
 			name = Cinelex;
 			packageProductDependencies = (
+				BFDDD33C2F39D6960040B38B /* Common */,
+				BFDDD3402F39DD640040B38B /* Design */,
 			);
 			productName = Cinelex;
 			productReference = BF2396942F39B02A0085016E /* Cinelex.app */;
@@ -452,6 +474,7 @@
 				DEVELOPMENT_TEAM = W3UM55KY7Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cinelex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -489,6 +512,7 @@
 				DEVELOPMENT_TEAM = W3UM55KY7Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cinelex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -640,6 +664,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BFDDD33C2F39D6960040B38B /* Common */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Common;
+		};
+		BFDDD3402F39DD640040B38B /* Design */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Design;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BF23968C2F39B02A0085016E /* Project object */;
 }
