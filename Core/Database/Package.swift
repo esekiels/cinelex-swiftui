@@ -9,12 +9,11 @@ let package = Package(
         .library(
             name: "Database",
             targets: ["Database"]
-        ),
+        )
     ],
     targets: [
         .target(
             name: "Database"
-        ),
-
+        )
     ]
 )

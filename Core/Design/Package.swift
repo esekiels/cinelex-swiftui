@@ -9,7 +9,7 @@ let package = Package(
         .library(
             name: "Design",
             targets: ["Design"]
-        ),
+        )
     ],
     targets: [
         .target(
@@ -17,7 +17,6 @@ let package = Package(
             resources: [
                 .process("Resource")
             ]
-        ),
-
+        )
     ]
 )

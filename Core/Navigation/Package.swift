@@ -8,11 +8,11 @@ let package = Package(
         .library(
             name: "Navigation",
             targets: ["Navigation"]
-        ),
+        )
     ],
     targets: [
         .target(
             name: "Navigation"
-        ),
+        )
     ]
 )

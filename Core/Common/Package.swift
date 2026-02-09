@@ -8,7 +8,7 @@ let package = Package(
         .library(
             name: "Common",
             targets: ["Common"]
-        ),
+        )
     ],
     targets: [
         .target(
@@ -16,7 +16,6 @@ let package = Package(
             resources: [
                 .process("Resource")
             ]
-        ),
-
+        )
     ]
 )

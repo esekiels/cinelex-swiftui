@@ -10,6 +10,7 @@ import Foundation
 public extension String {
     
     var localized: String {
+        // swiftlint:disable:next nslocalizedstring_key
         NSLocalizedString(self, bundle: .module, comment: "")
     }
 }
