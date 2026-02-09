@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BFDDD33D2F39D6960040B38B /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = BFDDD33C2F39D6960040B38B /* Common */; };
-		BFDDD3412F39DD640040B38B /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = BFDDD3402F39DD640040B38B /* Design */; };
+		BF1D5FE02F39E958002DE60B /* Splash in Frameworks */ = {isa = PBXBuildFile; productRef = BF1D5FDF2F39E958002DE60B /* Splash */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +39,7 @@
 		BF2397092F39B3A80085016E /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Navigation; path = Core/Navigation; sourceTree = SOURCE_ROOT; };
 		BF23970A2F39B4400085016E /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Database; path = Core/Database; sourceTree = SOURCE_ROOT; };
 		BF23970B2F39B4540085016E /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = Core/Data; sourceTree = SOURCE_ROOT; };
+		BFDDD34C2F39E4EB0040B38B /* Splash */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Splash; path = Feature/Splash; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -78,8 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFDDD3412F39DD640040B38B /* Design in Frameworks */,
-				BFDDD33D2F39D6960040B38B /* Common in Frameworks */,
+				BF1D5FE02F39E958002DE60B /* Splash in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +146,7 @@
 		BF2396F02F39B2470085016E /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				BFDDD34C2F39E4EB0040B38B /* Splash */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -179,8 +179,7 @@
 			);
 			name = Cinelex;
 			packageProductDependencies = (
-				BFDDD33C2F39D6960040B38B /* Common */,
-				BFDDD3402F39DD640040B38B /* Design */,
+				BF1D5FDF2F39E958002DE60B /* Splash */,
 			);
 			productName = Cinelex;
 			productReference = BF2396942F39B02A0085016E /* Cinelex.app */;
@@ -705,13 +704,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BFDDD33C2F39D6960040B38B /* Common */ = {
+		BF1D5FDF2F39E958002DE60B /* Splash */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Common;
-		};
-		BFDDD3402F39DD640040B38B /* Design */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Design;
+			productName = Splash;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
