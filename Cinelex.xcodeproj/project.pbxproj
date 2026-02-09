@@ -28,7 +28,13 @@
 		BF2396A12F39B02C0085016E /* CinelexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CinelexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF2396AB2F39B02C0085016E /* CinelexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CinelexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF2396CA2F39B0390085016E /* Cinelex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Cinelex.xcodeproj; sourceTree = "<group>"; };
-		BF2396D82F39B04A0085016E /* Cinelex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Cinelex.xcodeproj; sourceTree = "<group>"; };
+		BF2397052F39B3460085016E /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Common; path = Core/Common; sourceTree = SOURCE_ROOT; };
+		BF2397062F39B3640085016E /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Model; path = Core/Model; sourceTree = SOURCE_ROOT; };
+		BF2397072F39B3780085016E /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Core/Network; sourceTree = SOURCE_ROOT; };
+		BF2397082F39B3890085016E /* Design */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Design; path = Core/Design; sourceTree = SOURCE_ROOT; };
+		BF2397092F39B3A80085016E /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Navigation; path = Core/Navigation; sourceTree = SOURCE_ROOT; };
+		BF23970A2F39B4400085016E /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Database; path = Core/Database; sourceTree = SOURCE_ROOT; };
+		BF23970B2F39B4540085016E /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = Core/Data; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -77,9 +83,12 @@
 		BF23968B2F39B02A0085016E = {
 			isa = PBXGroup;
 			children = (
+				BF2396F02F39B2470085016E /* Feature */,
+				BF2396EF2F39B23A0085016E /* Core */,
 				BF2396962F39B02A0085016E /* Cinelex */,
 				BF2396A42F39B02C0085016E /* CinelexTests */,
 				BF2396AE2F39B02C0085016E /* CinelexUITests */,
+				BFDDD2F02F39B6C90040B38B /* Frameworks */,
 				BF2396952F39B02A0085016E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,11 +110,32 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BF2396DB2F39B04A0085016E /* Products */ = {
+		BF2396EF2F39B23A0085016E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BF23970B2F39B4540085016E /* Data */,
+				BF23970A2F39B4400085016E /* Database */,
+				BF2397072F39B3780085016E /* Network */,
+				BF2397062F39B3640085016E /* Model */,
+				BF2397092F39B3A80085016E /* Navigation */,
+				BF2397082F39B3890085016E /* Design */,
+				BF2397052F39B3460085016E /* Common */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		BF2396F02F39B2470085016E /* Feature */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Products;
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		BFDDD2F02F39B6C90040B38B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,10 +248,6 @@
 				{
 					ProductGroup = BF2396CB2F39B0390085016E /* Products */;
 					ProjectRef = BF2396CA2F39B0390085016E /* Cinelex.xcodeproj */;
-				},
-				{
-					ProductGroup = BF2396DB2F39B04A0085016E /* Products */;
-					ProjectRef = BF2396D82F39B04A0085016E /* Cinelex.xcodeproj */;
 				},
 			);
 			projectRoot = "";
