@@ -8,4 +8,8 @@
 public enum LocalizeConstant {
     
     public static let app = "app.name".localized
+    public static let nowPlaying = "now.playing".localized
+    public static let topRated = "top.rated".localized
+    public static let popular = "popular".localized
+    public static let upcoming = "upcoming".localized
 }

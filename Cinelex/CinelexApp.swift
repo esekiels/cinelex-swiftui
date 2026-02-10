@@ -12,11 +12,13 @@ import Navigation
 struct CinelexApp: App {
     
     @State private var coordinator = CinelexCoordinator()
+    private let factory = CinelexDIFactory()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(coordinator)
+                .environment(\.factory, factory)
         }
     }
 }

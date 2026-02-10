@@ -11,9 +11,21 @@ let package = Package(
             targets: ["Data"]
         )
     ],
+    dependencies: [
+        .package(path: "../Network"),
+        .package(path: "../Database"),
+        .package(path: "../Model"),
+        .package(path: "../Common")
+    ],
     targets: [
         .target(
-            name: "Data"
+            name: "Data",
+            dependencies: [
+                .product(name: "Network", package: "Network"),
+                .product(name: "Database", package: "Database"),
+                .product(name: "Model", package: "Model"),
+                .product(name: "Common", package: "Common")
+            ]
         )
     ]
 )

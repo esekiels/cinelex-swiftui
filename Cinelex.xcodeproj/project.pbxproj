@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BF1D5FE02F39E958002DE60B /* Splash in Frameworks */ = {isa = PBXBuildFile; productRef = BF1D5FDF2F39E958002DE60B /* Splash */; };
+		BF5826BF2F3A23A00035D267 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = BF5826BE2F3A23A00035D267 /* Home */; };
+		BF5826C22F3A35830035D267 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BF5826C12F3A35830035D267 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +41,7 @@
 		BF2397092F39B3A80085016E /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Navigation; path = Core/Navigation; sourceTree = SOURCE_ROOT; };
 		BF23970A2F39B4400085016E /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Database; path = Core/Database; sourceTree = SOURCE_ROOT; };
 		BF23970B2F39B4540085016E /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = Core/Data; sourceTree = SOURCE_ROOT; };
+		BF5826AC2F3A23350035D267 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Home; path = Feature/Home; sourceTree = SOURCE_ROOT; };
 		BFDDD34C2F39E4EB0040B38B /* Splash */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Splash; path = Feature/Splash; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -78,7 +81,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF5826C22F3A35830035D267 /* Kingfisher in Frameworks */,
 				BF1D5FE02F39E958002DE60B /* Splash in Frameworks */,
+				BF5826BF2F3A23A00035D267 /* Home in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +151,7 @@
 		BF2396F02F39B2470085016E /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				BF5826AC2F3A23350035D267 /* Home */,
 				BFDDD34C2F39E4EB0040B38B /* Splash */,
 			);
 			path = Feature;
@@ -180,6 +186,8 @@
 			name = Cinelex;
 			packageProductDependencies = (
 				BF1D5FDF2F39E958002DE60B /* Splash */,
+				BF5826BE2F3A23A00035D267 /* Home */,
+				BF5826C12F3A35830035D267 /* Kingfisher */,
 			);
 			productName = Cinelex;
 			productReference = BF2396942F39B02A0085016E /* Cinelex.app */;
@@ -265,6 +273,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				BFDDD34B2F39E2D90040B38B /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				BF5826C02F3A35830035D267 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BF2396952F39B02A0085016E /* Products */;
@@ -701,6 +710,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BF5826C02F3A35830035D267 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.2;
+			};
+		};
 		BFDDD34B2F39E2D90040B38B /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint";
@@ -715,6 +732,15 @@
 		BF1D5FDF2F39E958002DE60B /* Splash */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Splash;
+		};
+		BF5826BE2F3A23A00035D267 /* Home */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Home;
+		};
+		BF5826C12F3A35830035D267 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF5826C02F3A35830035D267 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

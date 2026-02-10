@@ -8,4 +8,7 @@
 enum ApiConstant: String {
     
     case nowPlaying = "movie/now_playing"
+    case upcoming = "movie/upcoming"
+    case topRated = "movie/top_rated"
+    case popular = "movie/popular"
 }
