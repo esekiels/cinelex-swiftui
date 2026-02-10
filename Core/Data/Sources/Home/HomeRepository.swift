@@ -49,7 +49,7 @@ public final class HomeRepository: HomeRepositoryProtocol {
     ) async throws -> [Movie] {
         if let cachedItems = try? await dao.fetch(category),
            !cachedItems.isEmpty {
-            
+            CinelexLogger.debug("Cache hit for \(category): \(cachedItems.count) items")
             Task {
                 await refreshCache(category: category, remoteFetch: remoteFetch)
             }

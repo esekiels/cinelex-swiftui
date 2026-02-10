@@ -11,15 +11,17 @@ import Model
 @Model
 public final class MovieEntity {
     
-    @Attribute(.unique) public var id: Int
+    @Attribute(.unique) public var uniqueKey: String
+    var movieId: Int
     var title: String
     var posterPath: String
     var backdropPath: String
     var category: String
     var createdAt: Date
     
-    init(id: Int, title: String, posterPath: String, backdropPath: String, category: String) {
-        self.id = id
+    init(movieId: Int, title: String, posterPath: String, backdropPath: String, category: String) {
+        self.uniqueKey = "\(movieId)_\(category)"
+        self.movieId = movieId
         self.title = title
         self.posterPath = posterPath
         self.backdropPath = backdropPath
@@ -31,12 +33,12 @@ public final class MovieEntity {
 extension MovieEntity {
     
     func toDomain() -> Movie {
-        Movie(id: id, title: title, backdropPath: backdropPath, posterPath: posterPath)
+        Movie(id: movieId, title: title, backdropPath: backdropPath, posterPath: posterPath)
     }
     
     convenience init(_ movie: Movie, category: String) {
         self.init(
-            id: movie.id,
+            movieId: movie.id,
             title: movie.title,
             posterPath: movie.posterPath,
             backdropPath: movie.backdropPath,
