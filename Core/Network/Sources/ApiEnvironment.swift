@@ -9,13 +9,22 @@ import Foundation
 
 public enum ApiEnvironment {
     
-    public static let token: String = getValue(for: "TOKEN")
+    public static var token: String {
+        getValue(for: "TOKEN")
+    }
     
-    public static let baseUrl: String = getValue(for: "BASE_URL")
+    public static var baseUrl: String {
+        getValue(for: "BASE_URL")
+    }
     
     private static func getValue(for key: String) -> String {
-        guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? String, !value.isEmpty else {
+        guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? String,
+              !value.isEmpty else {
+            #if DEBUG
+            return ""
+            #else
             fatalError("\(key) not found or empty in .plist")
+            #endif
         }
         return value
     }

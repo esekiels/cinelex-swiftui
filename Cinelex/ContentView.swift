@@ -8,10 +8,12 @@
 import Design
 import Navigation
 import Splash
+import Home
 
 struct ContentView: View {
     
     @Environment(CinelexCoordinator.self) private var coordinator
+    @Environment(\.factory) private var factory
     
     var body: some View {
         Group {
@@ -19,7 +21,7 @@ struct ContentView: View {
             case .splash:
                 SplashView()
             case .home:
-                EmptyView()
+                HomeView(viewModel: factory.injectHomeViewModel())
             }
         }
     }

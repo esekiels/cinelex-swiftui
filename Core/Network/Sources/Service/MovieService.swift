@@ -6,34 +6,43 @@
 //
 
 import Foundation
+import Model
 
 public protocol MovieServiceProtocol: Sendable {
     
-    func fetchNowPlaying() async throws
+    func fetchNowPlaying() async throws -> [Movie]
+    func fetchUpcoming() async throws -> [Movie]
+    func fetchTopRated() async throws -> [Movie]
+    func fetchPopular() async throws -> [Movie]
 }
 
 public final class MovieService: MovieServiceProtocol {
     
-    private let apiManager: ApiManager
-    private let baseUrl: String
-    private let token: String
+    private let apiManager: ApiManagerProtocol
     
-    public init(
-        apiManager: ApiManager = .shared,
-        baseUrl: String = ApiEnvironment.baseUrl,
-        token: String = ApiEnvironment.token
-    ) {
+    public init(apiManager: ApiManagerProtocol = ApiManager.shared) {
         self.apiManager = apiManager
-        self.baseUrl = baseUrl
-        self.token = token
     }
     
-    public func fetchNowPlaying() async throws {
+    public func fetchNowPlaying() async throws -> [Movie] {
         try await fetchMovies(.nowPlaying)
     }
     
-    private func fetchMovies(_ endpoint: ApiConstant) async throws {
-        let url = "\(baseUrl)\(endpoint.rawValue)?&includelanguage=en-US&page=1"
-        let response: MovieResponse = try await apiManager.get(url, token: token)
+    public func fetchUpcoming() async throws -> [Movie] {
+        try await fetchMovies(.upcoming)
+    }
+    
+    public func fetchTopRated() async throws -> [Movie] {
+        try await fetchMovies(.topRated)
+    }
+    
+    public func fetchPopular() async throws -> [Movie] {
+        try await fetchMovies(.popular)
+    }
+    
+    private func fetchMovies(_ endpoint: ApiConstant) async throws -> [Movie] {
+        let url = "\(ApiEnvironment.baseUrl)\(endpoint.rawValue)?&includelanguage=en-US&page=1"
+        let response: MovieResponse = try await apiManager.get(url, token: ApiEnvironment.token)
+        return response.results
     }
 }

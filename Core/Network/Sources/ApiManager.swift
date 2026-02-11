@@ -5,10 +5,13 @@
 //  Created by Esekiel Surbakti on 09/02/26.
 //
 
-import Foundation
 import Common
 
-public class ApiManager: @unchecked Sendable {
+public protocol ApiManagerProtocol: Sendable {
+    func get<T: Decodable>(_ url: String, token: String?) async throws -> T
+}
+
+public class ApiManager: ApiManagerProtocol, @unchecked Sendable {
     
     public static let shared = ApiManager()
     private let session: URLSession
@@ -24,7 +27,7 @@ public class ApiManager: @unchecked Sendable {
         self.decoder = JSONDecoder()
     }
     
-    func get<T: Decodable>(_ url: String, token: String? = nil) async throws -> T {
+    public func get<T: Decodable>(_ url: String, token: String? = nil) async throws -> T {
         let request = try createRequest(url: url, method: "GET", token: token)
         return try await performRequest(request)
     }
@@ -37,7 +40,7 @@ public class ApiManager: @unchecked Sendable {
     ) throws -> URLRequest {
         guard let url = URL(string: url) else {
             CinelexLogger.error("Invalid URL: \(url)")
-            throw ApiError.invalidURL
+            throw CinelexApiError.invalidURL
         }
         
         var request = URLRequest(url: url)
@@ -66,18 +69,18 @@ public class ApiManager: @unchecked Sendable {
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 CinelexLogger.error("Invalid response type")
-                throw ApiError.unknownError(message: "Invalid response")
+                throw CinelexApiError.unknownError(message: "Invalid response")
             }
             
             try validateResponse(httpResponse, data: data)
             
             return try decoder.decode(T.self, from: data)
-        } catch let error as ApiError {
+        } catch let error as CinelexApiError {
             CinelexLogger.error("API Error: \(error)")
             throw error
         } catch {
             CinelexLogger.error("Decoding error: \(error.localizedDescription)")
-            throw ApiError.decodingError(error)
+            throw CinelexApiError.decodingError(error)
         }
     }
     
@@ -87,13 +90,15 @@ public class ApiManager: @unchecked Sendable {
             return
         case 401:
             CinelexLogger.warning("Unauthorized request (401)")
-            throw ApiError.unauthorized(errorResponse: parseErrorResponse(from: data))
+            let errorResponse = parseErrorResponse(from: data)
+            throw CinelexApiError.unauthorized(code: errorResponse?.code, message: errorResponse?.message)
         case 504:
             CinelexLogger.warning("Request timeout (504)")
-            throw ApiError.timeout
+            throw CinelexApiError.timeout
         default:
             CinelexLogger.warning("Server error: \(response.statusCode)")
-            throw ApiError.serverError(errorResponse: parseErrorResponse(from: data))
+            let errorResponse = parseErrorResponse(from: data)
+            throw CinelexApiError.serverError(code: errorResponse?.code, message: errorResponse?.message)
         }
     }
     
