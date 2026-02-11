@@ -14,7 +14,6 @@ let package = Package(
     dependencies: [
         .package(path: "../../Core/Data"),
         .package(path: "../../Core/Design"),
-        .package(path: "../../Core/Common"),
         .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "8.0.0"))
     ],
     targets: [
@@ -23,9 +22,15 @@ let package = Package(
             dependencies: [
                 .product(name: "Data", package: "Data"),
                 .product(name: "Design", package: "Design"),
-                .product(name: "Common", package: "Common"),
                 .product(name: "Kingfisher", package: "Kingfisher")
             ],
+        ),
+        .testTarget(
+            name: "HomeTests",
+            dependencies: [
+                "Home",
+                .product(name: "Data", package: "Data")
+            ]
         )
     ]
 )

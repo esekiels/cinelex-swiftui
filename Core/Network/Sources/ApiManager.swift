@@ -7,7 +7,11 @@
 
 import Common
 
-public class ApiManager: @unchecked Sendable {
+public protocol ApiManagerProtocol: Sendable {
+    func get<T: Decodable>(_ url: String, token: String?) async throws -> T
+}
+
+public class ApiManager: ApiManagerProtocol, @unchecked Sendable {
     
     public static let shared = ApiManager()
     private let session: URLSession
@@ -23,7 +27,7 @@ public class ApiManager: @unchecked Sendable {
         self.decoder = JSONDecoder()
     }
     
-    func get<T: Decodable>(_ url: String, token: String? = nil) async throws -> T {
+    public func get<T: Decodable>(_ url: String, token: String? = nil) async throws -> T {
         let request = try createRequest(url: url, method: "GET", token: token)
         return try await performRequest(request)
     }

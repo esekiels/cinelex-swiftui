@@ -10,8 +10,22 @@ public enum UiState {
     case loading
     case error(CinelexError)
     
+    public var isIdle: Bool {
+        if case .idle = self {
+            return true
+        }
+        return false
+    }
+    
     public var isLoading: Bool {
         if case .loading = self {
+            return true
+        }
+        return false
+    }
+    
+    public var isError: Bool {
+        if case .error = self {
             return true
         }
         return false

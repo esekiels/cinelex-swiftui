@@ -26,6 +26,15 @@ let package = Package(
                 .product(name: "Model", package: "Model"),
                 .product(name: "Common", package: "Common")
             ]
+        ),
+        .testTarget(
+            name: "DataTests",
+            dependencies: [
+                "Data",
+                .product(name: "Network", package: "Network"),
+                .product(name: "Database", package: "Database"),
+                .product(name: "Model", package: "Model")
+            ]
         )
     ]
 )

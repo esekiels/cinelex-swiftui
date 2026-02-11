@@ -20,6 +20,13 @@ let package = Package(
             dependencies: [
                 .product(name: "Model", package: "Model")
             ]
+        ),
+        .testTarget(
+            name: "DatabaseTests",
+            dependencies: [
+                "Database",
+                .product(name: "Model", package: "Model"),
+            ]
         )
     ]
 )

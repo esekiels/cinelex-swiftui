@@ -18,9 +18,9 @@ public protocol MovieServiceProtocol: Sendable {
 
 public final class MovieService: MovieServiceProtocol {
     
-    private let apiManager: ApiManager
+    private let apiManager: ApiManagerProtocol
     
-    public init (apiManager: ApiManager = .shared) {
+    public init(apiManager: ApiManagerProtocol = ApiManager.shared) {
         self.apiManager = apiManager
     }
     
