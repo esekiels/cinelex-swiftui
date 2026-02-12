@@ -33,7 +33,7 @@ public struct DetailsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            viewModel.fetchDetails()
+            await viewModel.fetchDetails()
         }
         .sheet(item: $selectedTrailer) { trailer in
             if let url = trailer.youtubeURL {
@@ -168,7 +168,6 @@ public struct DetailsView: View {
         }
         .frame(width: 80)
     }
-    
     
     // MARK: - Crew
     

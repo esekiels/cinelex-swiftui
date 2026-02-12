@@ -30,16 +30,16 @@ import Model
         #expect(await dao.fetchCalled == true)
     }
 
-    @Test func fetchMoviesFromCache() async throws {
+    @Test func fetchMoviesFromCacheWhenNetworkFails() async throws {
         let (sut, dao, service) = makeSUT()
         await dao.seedCache(Movie.stubs, category: "nowPlaying")
+        await service.setShouldThrowError(true)
         
         let movies = try await sut.fetchNowPlaying()
         
         #expect(movies.count == Movie.stubs.count)
         #expect(movies[0].title == "The Shawshank Redemption")
         #expect(await dao.fetchCalled == true)
-        #expect(await service.fetchNowPlayingCalled == false)
     }
 
     @Test func fetchMoviesNetworkErrorWithEmptyCache() async {

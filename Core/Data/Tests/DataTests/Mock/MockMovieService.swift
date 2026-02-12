@@ -12,6 +12,7 @@ import Common
 final actor MockMovieService: MovieServiceProtocol {
     
     private var mockMovies: [Movie] = []
+    private var mockDetails: MovieDetails = MovieDetails.stub
     var shouldThrowError = false
     var errorToThrow: Error?
     
@@ -19,6 +20,7 @@ final actor MockMovieService: MovieServiceProtocol {
     private(set) var fetchPopularCalled = false
     private(set) var fetchTopRatedCalled = false
     private(set) var fetchUpcomingCalled = false
+    private(set) var fetchDetailsCalled = false
     
     func setMockMovies(_ movies: [Movie]) {
         mockMovies = movies
@@ -50,5 +52,11 @@ final actor MockMovieService: MovieServiceProtocol {
         fetchUpcomingCalled = true
         if shouldThrowError { throw errorToThrow ?? NSError(domain: "", code: 0) }
         return mockMovies
+    }
+    
+    func fetchDetails(_ movieId: Int) async throws -> MovieDetails {
+        fetchDetailsCalled = true
+        if shouldThrowError { throw errorToThrow ?? NSError(domain: "", code: 0) }
+        return mockDetails
     }
 }

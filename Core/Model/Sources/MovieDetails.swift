@@ -132,7 +132,9 @@ public struct Cast: Identifiable, Codable, Sendable {
     public let profilePath: String?
     
     public var profileURL: URL? {
-        guard let profilePath else { return nil }
+        guard let profilePath else {
+            return nil
+        }
         return URL(string: "https://image.tmdb.org/t/p/w185" + profilePath)
     }
     
