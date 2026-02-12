@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "8C04BD4B-32AF-4276-B01B-2BBA040020C6",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Core\/Database",
+        "identifier" : "DatabaseTests",
+        "name" : "DatabaseTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Core\/Network",
+        "identifier" : "NetworkTests",
+        "name" : "NetworkTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Core\/Data",
+        "identifier" : "DataTests",
+        "name" : "DataTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Feature\/Home",
+        "identifier" : "HomeTests",
+        "name" : "HomeTests"
+      }
+    }
+  ],
+  "version" : 1
+}

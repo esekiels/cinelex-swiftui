@@ -12,17 +12,15 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../../Core/Data"),
-        .package(path: "../../Core/Design"),
-        .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "8.0.0"))
+        .package(path: "../Details"),
+        .package(path: "../Core/Data")
     ],
     targets: [
         .target(
             name: "Home",
             dependencies: [
-                .product(name: "Data", package: "Data"),
-                .product(name: "Design", package: "Design"),
-                .product(name: "Kingfisher", package: "Kingfisher")
+                .product(name: "Details", package: "Details"),
+                .product(name: "Data", package: "Data")
             ],
         ),
         .testTarget(

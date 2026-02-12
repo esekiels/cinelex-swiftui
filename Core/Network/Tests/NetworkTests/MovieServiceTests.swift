@@ -18,6 +18,8 @@ import Common
         return (sut, mock)
     }
     
+    // MARK: - Fetch Movies
+    
     static let endpoints: [(String, @Sendable (MovieService) async throws -> [Movie])] = [
         ("now_playing", { try await $0.fetchNowPlaying() }),
         ("popular", { try await $0.fetchPopular() }),
@@ -60,6 +62,34 @@ import Common
         
         await #expect(throws: CinelexApiError.self) {
             _ = try await method(sut)
+        }
+    }
+    
+    // MARK: - Fetch Details
+    
+    @Test func fetchDetailsSuccess() async throws {
+        let (sut, mock) = makeSUT()
+        let expectedResponse = JsonLoader.load("DetailsResponse", as: MovieDetails.self)
+        mock.setMockResponse(for: "278", response: expectedResponse)
+        
+        let details = try await sut.fetchDetails(278)
+        
+        #expect(mock.getCalled == true)
+        #expect(details.id == 278)
+        #expect(details.title == "The Shawshank Redemption")
+        #expect(details.genres.count == 2)
+        #expect(details.credits?.cast.isEmpty == false)
+        #expect(details.credits?.crew.isEmpty == false)
+        #expect(details.videos?.results.isEmpty == false)
+    }
+    
+    @Test func fetchDetailsFailure() async {
+        let (sut, mock) = makeSUT()
+        mock.shouldThrowError = true
+        mock.errorToThrow = CinelexApiError.unknownError(message: "Network error")
+        
+        await #expect(throws: CinelexApiError.self) {
+            _ = try await sut.fetchDetails(278)
         }
     }
 }

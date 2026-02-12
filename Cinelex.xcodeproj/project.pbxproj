@@ -42,6 +42,8 @@
 		BF23970A2F39B4400085016E /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Database; path = Core/Database; sourceTree = SOURCE_ROOT; };
 		BF23970B2F39B4540085016E /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = Core/Data; sourceTree = SOURCE_ROOT; };
 		BF5826AC2F3A23350035D267 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Home; path = Feature/Home; sourceTree = SOURCE_ROOT; };
+		BFD687452F3E19270081393D /* Details */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Details; path = Feature/Details; sourceTree = SOURCE_ROOT; };
+		BFD6877A2F3E30C20081393D /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllTests.xctestplan; sourceTree = "<group>"; };
 		BFDDD34C2F39E4EB0040B38B /* Splash */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Splash; path = Feature/Splash; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 		BF23968B2F39B02A0085016E = {
 			isa = PBXGroup;
 			children = (
+				BFD6877A2F3E30C20081393D /* AllTests.xctestplan */,
 				BF2396F02F39B2470085016E /* Feature */,
 				BF2396EF2F39B23A0085016E /* Core */,
 				BF2396962F39B02A0085016E /* Cinelex */,
@@ -151,6 +154,7 @@
 		BF2396F02F39B2470085016E /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				BFD687452F3E19270081393D /* Details */,
 				BF5826AC2F3A23350035D267 /* Home */,
 				BFDDD34C2F39E4EB0040B38B /* Splash */,
 			);

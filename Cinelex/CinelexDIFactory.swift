@@ -10,15 +10,31 @@ import Database
 import Network
 import SwiftUI
 import Home
+import Details
 
-public final class CinelexDIFactory: @unchecked Sendable {
+@MainActor
+public final class CinelexDIFactory: HomeFactory {
 
     private lazy var homeRepository: HomeRepositoryProtocol = {
         HomeRepository(dao: MovieDao(), service: MovieService())
     }()
     
+    private lazy var detailsRepository: DetailsRepositoryProtocol = {
+        DetailsRepository(service: MovieService(), dao: MovieDetailsDao())
+    }()
+    
     public func injectHomeViewModel() -> HomeViewModel {
         HomeViewModel(repository: homeRepository)
+    }
+    
+    public func injectDetailsViewModel(_ movieId: Int) -> DetailsViewModel {
+        DetailsViewModel(repository: detailsRepository, movieId: movieId)
+    }
+    
+    // MARK: - Modules DI Factory
+    
+    public func makeDetailsView(_ movieId: Int) -> AnyView {
+        return AnyView(DetailsView(viewModel: injectDetailsViewModel(movieId)))
     }
 }
 

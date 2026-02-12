@@ -13,7 +13,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Model"),
-        .package(path: "../Common"),
+        .package(path: "../Common")
     ],
     targets: [
         .target(

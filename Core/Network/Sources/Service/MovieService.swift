@@ -14,6 +14,7 @@ public protocol MovieServiceProtocol: Sendable {
     func fetchUpcoming() async throws -> [Movie]
     func fetchTopRated() async throws -> [Movie]
     func fetchPopular() async throws -> [Movie]
+    func fetchDetails(_ movieId: Int) async throws -> MovieDetails
 }
 
 public final class MovieService: MovieServiceProtocol {
@@ -38,6 +39,12 @@ public final class MovieService: MovieServiceProtocol {
     
     public func fetchPopular() async throws -> [Movie] {
         try await fetchMovies(.popular)
+    }
+    
+    public func fetchDetails(_ movieId: Int) async throws -> MovieDetails {
+        let url = "\(ApiEnvironment.baseUrl)\(ApiConstant.details.rawValue)?append_to_response=videos,credits"
+            .replacingOccurrences(of: "{movie_id}", with: "\(movieId)")
+        return try await apiManager.get(url, token: ApiEnvironment.token)
     }
     
     private func fetchMovies(_ endpoint: ApiConstant) async throws -> [Movie] {
