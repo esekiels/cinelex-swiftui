@@ -25,7 +25,7 @@ let package = Package(
             name: "DatabaseTests",
             dependencies: [
                 "Database",
-                .product(name: "Model", package: "Model"),
+                .product(name: "Model", package: "Model")
             ]
         )
     ]

@@ -19,6 +19,7 @@ struct CinelexApp: App {
             ContentView()
                 .environment(coordinator)
                 .environment(\.factory, factory)
+                .environment(\.homeFactory, factory)
         }
     }
 }

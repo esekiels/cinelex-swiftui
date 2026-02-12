@@ -46,23 +46,25 @@ struct HomeBackdropCarousel: View {
         let cardWidth = geometry.size.width * 0.75
         let cardHeight = cardWidth * (9 / 16)
         
-        return VStack(alignment: .leading, spacing: 8) {
-            KFImage.url(movie.backdropUrl)
-                .placeholder { ImagePlaceholder(16 / 9) }
-                .resizable()
-                .loadDiskFileSynchronously()
-                .cacheOriginalImage()
-                .scaleFactor(UIScreen.main.scale)
-                .fade(duration: 0.2)
-                .aspectRatio(16 / 9, contentMode: .fill)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-            
-            Text(movie.title)
-                .font(.subheadline)
-                .fontWeight(.medium)
-                .lineLimit(1)
+        return NavigationLink(value: movie) {
+            VStack(alignment: .leading, spacing: 8) {
+                KFImage.url(movie.backdropUrl)
+                    .placeholder { ImagePlaceholder(16 / 9) }
+                    .resizable()
+                    .loadDiskFileSynchronously()
+                    .cacheOriginalImage()
+                    .scaleFactor(UIScreen.main.scale)
+                    .fade(duration: 0.2)
+                    .aspectRatio(16 / 9, contentMode: .fill)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                
+                Text(movie.title)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .lineLimit(1)
+            }
+            .frame(width: cardWidth, height: cardHeight)
         }
-        .frame(width: cardWidth, height: cardHeight)
         .buttonStyle(.plain)
     }
 }

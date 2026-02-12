@@ -46,19 +46,21 @@ struct HomePosterCarousel: View {
         let cardWidth = geometry.size.width * 0.4
         let cardHeight = cardWidth * (3 / 2)
         
-        return KFImage.url(movie.posterUrl)
-            .placeholder {
-                ImagePlaceholder(2 / 3)
-            }
-            .resizable()
-            .loadDiskFileSynchronously()
-            .cacheOriginalImage()
-            .scaleFactor(UIScreen.main.scale)
-            .fade(duration: 0.2)
-            .aspectRatio(2 / 3, contentMode: .fit)
-            .frame(width: cardWidth, height: cardHeight)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .buttonStyle(.plain)
+        return NavigationLink(value: movie) {
+            KFImage.url(movie.posterUrl)
+                .placeholder {
+                    ImagePlaceholder(2 / 3)
+                }
+                .resizable()
+                .loadDiskFileSynchronously()
+                .cacheOriginalImage()
+                .scaleFactor(UIScreen.main.scale)
+                .fade(duration: 0.2)
+                .aspectRatio(2 / 3, contentMode: .fit)
+                .frame(width: cardWidth, height: cardHeight)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .buttonStyle(.plain)
+        }
     }
 }
 

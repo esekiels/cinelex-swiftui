@@ -9,10 +9,12 @@ import Common
 import Data
 import Design
 import Model
+import Details
 
 public struct HomeView: View {
     
     @State private var viewModel: HomeViewModel
+    @Environment(\.homeFactory) private var factory
     
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -70,6 +72,11 @@ public struct HomeView: View {
             .navigationTitle(LocalizeConstant.app)
             .refreshable {
                 await viewModel.refresh()
+            }
+            .navigationDestination(for: Movie.self) { movie in
+                if let factory {
+                    factory.makeDetailsView(movie.id)
+                }
             }
         }
     }
