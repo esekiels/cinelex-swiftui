@@ -12,7 +12,7 @@ import Common
 
 @Suite struct MovieServiceTests {
     
-    private func makeSUT() -> (sut: MovieService, mock: MockApiManager) {
+    private func makeSUT() -> (sut: MovieServiceProtocol, mock: MockApiManager) {
         let mock = MockApiManager()
         let sut = MovieService(apiManager: mock)
         return (sut, mock)
@@ -20,7 +20,7 @@ import Common
     
     // MARK: - Fetch Movies
     
-    static let endpoints: [(String, @Sendable (MovieService) async throws -> [Movie])] = [
+    static let endpoints: [(String, @Sendable (MovieServiceProtocol) async throws -> [Movie])] = [
         ("now_playing", { try await $0.fetchNowPlaying() }),
         ("popular", { try await $0.fetchPopular() }),
         ("top_rated", { try await $0.fetchTopRated() }),
@@ -30,7 +30,7 @@ import Common
     @Test(arguments: endpoints)
     func fetchMoviesSuccess(
         endpoint: String,
-        method: @Sendable (MovieService) async throws -> [Movie]
+        method: @Sendable (MovieServiceProtocol) async throws -> [Movie]
     ) async throws {
         let (sut, mock) = makeSUT()
         let expectedResponse = JsonLoader.load("NowPlayingResponse", as: MovieResponse.self)
@@ -45,7 +45,7 @@ import Common
         #expect(mock.lastURL?.contains(endpoint) ?? false)
     }
     
-    static let failureEndpoints: [@Sendable (MovieService) async throws -> [Movie]] = [
+    static let failureEndpoints: [@Sendable (MovieServiceProtocol) async throws -> [Movie]] = [
         { try await $0.fetchNowPlaying() },
         { try await $0.fetchPopular() },
         { try await $0.fetchTopRated() },
@@ -54,7 +54,7 @@ import Common
     
     @Test(arguments: failureEndpoints)
     func fetchMoviesFailure(
-        method: @Sendable (MovieService) async throws -> [Movie]
+        method: @Sendable (MovieServiceProtocol) async throws -> [Movie]
     ) async {
         let (sut, mock) = makeSUT()
         mock.shouldThrowError = true

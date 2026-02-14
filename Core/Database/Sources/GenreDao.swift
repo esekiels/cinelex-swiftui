@@ -25,7 +25,9 @@ public actor GenreDao: GenreDaoProtocol {
     }
 
     public func fetch() async throws -> [Genre] {
-        let descriptor = FetchDescriptor<GenreEntity>()
+        let descriptor = FetchDescriptor<GenreEntity>(
+            sortBy: [SortDescriptor(\.id)]
+        )
         let entities = try modelContext.fetch(descriptor)
         return entities.toDomain()
     }

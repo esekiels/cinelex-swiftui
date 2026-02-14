@@ -20,7 +20,7 @@ public struct Movie: Identifiable, Hashable, Decodable, Sendable {
     public let title: String
     public let backdropPath: String
     public let posterPath: String
-    
+
     private let imageUrl = "https://image.tmdb.org/t/p/original"
     
     public var posterUrl: URL? {

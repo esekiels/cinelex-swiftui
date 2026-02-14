@@ -14,7 +14,8 @@ public final class DatabaseManager: @unchecked Sendable {
     private init() {
         let schema = Schema([
             MovieEntity.self,
-            MovieDetailsEntity.self
+            MovieDetailsEntity.self,
+            GenreEntity.self
         ])
         let configuration = ModelConfiguration(
             schema: schema,

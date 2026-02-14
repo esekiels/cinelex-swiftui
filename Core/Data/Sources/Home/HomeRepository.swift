@@ -55,6 +55,7 @@ public final class HomeRepository: HomeRepositoryProtocol {
     public func fetchGenres() async {
         do {
             let genres = try await genreService.fetchGenres()
+            try await genreDao.deleteAll()
             try await genreDao.save(genres)
             CinelexLogger.debug("Saved \(genres.count) genres")
         } catch {
