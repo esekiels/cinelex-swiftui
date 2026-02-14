@@ -12,4 +12,5 @@ enum ApiConstant: String {
     case topRated = "movie/top_rated"
     case popular = "movie/popular"
     case details = "movie/{movie_id}"
+    case genres = "genre/movie/list"
 }

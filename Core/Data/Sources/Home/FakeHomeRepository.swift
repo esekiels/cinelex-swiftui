@@ -26,4 +26,6 @@ public final class FakeHomeRepository: HomeRepositoryProtocol {
     public func fetchTopRated() async throws -> [Movie] {
         Movie.stubs
     }
+    
+    public func fetchGenres() async {}
 }

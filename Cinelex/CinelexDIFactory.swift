@@ -16,7 +16,12 @@ import Details
 public final class CinelexDIFactory: HomeFactory {
 
     private lazy var homeRepository: HomeRepositoryProtocol = {
-        HomeRepository(dao: MovieDao(), service: MovieService())
+        HomeRepository(
+            service: MovieService(),
+            genreService: GenreService(),
+            dao: MovieDao(),
+            genreDao: GenreDao()
+        )
     }()
     
     private lazy var detailsRepository: DetailsRepositoryProtocol = {
