@@ -11,9 +11,10 @@ import Network
 import SwiftUI
 import Home
 import Details
+import Search
 
 @MainActor
-public final class CinelexDIFactory: HomeFactory {
+public final class CinelexDIFactory: HomeFactory, SearchFactory {
 
     private lazy var homeRepository: HomeRepositoryProtocol = {
         HomeRepository(
@@ -28,12 +29,20 @@ public final class CinelexDIFactory: HomeFactory {
         DetailsRepository(service: MovieService(), dao: MovieDetailsDao())
     }()
     
+    private lazy var searchRepository: SearchRepositoryProtocol = {
+       SearchRepository(service: MovieService(), genreDao: GenreDao(), movieDao: MovieDao())
+    }()
+    
     public func injectHomeViewModel() -> HomeViewModel {
         HomeViewModel(repository: homeRepository)
     }
     
     public func injectDetailsViewModel(_ movieId: Int) -> DetailsViewModel {
         DetailsViewModel(repository: detailsRepository, movieId: movieId)
+    }
+    
+    public func injectSearchViewModel() -> SearchViewModel {
+        SearchViewModel(repository: searchRepository)
     }
     
     // MARK: - Modules DI Factory

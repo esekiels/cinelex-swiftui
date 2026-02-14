@@ -12,4 +12,6 @@ public enum LocalizeConstant {
     public static let topRated = "top.rated".localized
     public static let popular = "popular".localized
     public static let upcoming = "upcoming".localized
+    public static let home = "home".localized
+    public static let search = "search".localized
 }

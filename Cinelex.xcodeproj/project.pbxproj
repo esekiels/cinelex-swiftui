@@ -10,6 +10,7 @@
 		BF1D5FE02F39E958002DE60B /* Splash in Frameworks */ = {isa = PBXBuildFile; productRef = BF1D5FDF2F39E958002DE60B /* Splash */; };
 		BF5826BF2F3A23A00035D267 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = BF5826BE2F3A23A00035D267 /* Home */; };
 		BF5826C22F3A35830035D267 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BF5826C12F3A35830035D267 /* Kingfisher */; };
+		BF805A372F40C9DD00876064 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = BF805A362F40C9DD00876064 /* Search */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		BF23970A2F39B4400085016E /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Database; path = Core/Database; sourceTree = SOURCE_ROOT; };
 		BF23970B2F39B4540085016E /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = Core/Data; sourceTree = SOURCE_ROOT; };
 		BF5826AC2F3A23350035D267 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Home; path = Feature/Home; sourceTree = SOURCE_ROOT; };
+		BF805A242F40C34200876064 /* Search */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Search; path = Feature/Search; sourceTree = SOURCE_ROOT; };
 		BFD687452F3E19270081393D /* Details */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Details; path = Feature/Details; sourceTree = SOURCE_ROOT; };
 		BFD6877A2F3E30C20081393D /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllTests.xctestplan; sourceTree = "<group>"; };
 		BFDDD34C2F39E4EB0040B38B /* Splash */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Splash; path = Feature/Splash; sourceTree = SOURCE_ROOT; };
@@ -83,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF805A372F40C9DD00876064 /* Search in Frameworks */,
 				BF5826C22F3A35830035D267 /* Kingfisher in Frameworks */,
 				BF1D5FE02F39E958002DE60B /* Splash in Frameworks */,
 				BF5826BF2F3A23A00035D267 /* Home in Frameworks */,
@@ -154,6 +157,7 @@
 		BF2396F02F39B2470085016E /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				BF805A242F40C34200876064 /* Search */,
 				BFD687452F3E19270081393D /* Details */,
 				BF5826AC2F3A23350035D267 /* Home */,
 				BFDDD34C2F39E4EB0040B38B /* Splash */,
@@ -192,6 +196,7 @@
 				BF1D5FDF2F39E958002DE60B /* Splash */,
 				BF5826BE2F3A23A00035D267 /* Home */,
 				BF5826C12F3A35830035D267 /* Kingfisher */,
+				BF805A362F40C9DD00876064 /* Search */,
 			);
 			productName = Cinelex;
 			productReference = BF2396942F39B02A0085016E /* Cinelex.app */;
@@ -745,6 +750,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BF5826C02F3A35830035D267 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		BF805A362F40C9DD00876064 /* Search */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Search;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

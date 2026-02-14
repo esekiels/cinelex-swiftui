@@ -9,32 +9,64 @@ import Foundation
 
 public struct Movie: Identifiable, Hashable, Decodable, Sendable {
     
-    public init(id: Int, title: String, backdropPath: String, posterPath: String) {
+    public init(
+        id: Int,
+        title: String,
+        backdropPath: String? = nil,
+        posterPath: String? = nil,
+        releaseDate: String = "",
+        voteAverage: Double = 0.0,
+        voteCount: Int = 0,
+        genreIds: [Int]? = nil
+    ) {
         self.id = id
         self.title = title
         self.backdropPath = backdropPath
         self.posterPath = posterPath
+        self.releaseDate = releaseDate
+        self.voteAverage = voteAverage
+        self.voteCount = voteCount
+        self.genreIds = genreIds
     }
     
     public let id: Int
     public let title: String
-    public let backdropPath: String
-    public let posterPath: String
-
+    public let backdropPath: String?
+    public let posterPath: String?
+    public let releaseDate: String
+    public let voteAverage: Double
+    public let voteCount: Int
+    public let genreIds: [Int]?
+    public var genres: [Genre]?
+    
     private let imageUrl = "https://image.tmdb.org/t/p/original"
     
     public var posterUrl: URL? {
-        URL(string: imageUrl + posterPath)
+        guard let posterPath else {
+            return nil
+        }
+        return URL(string: imageUrl + posterPath)
     }
     
     public var backdropUrl: URL? {
-        URL(string: imageUrl + backdropPath)
+        guard let backdropPath else {
+            return nil
+        }
+        return URL(string: imageUrl + backdropPath)
+    }
+    
+    public var rating: String {
+        String(format: "%.1f", voteAverage)
     }
     
     private enum CodingKeys: String, CodingKey {
         case id, title
         case backdropPath = "backdrop_path"
         case posterPath = "poster_path"
+        case releaseDate = "release_date"
+        case voteAverage = "vote_average"
+        case voteCount = "vote_count"
+        case genreIds = "genre_ids"
     }
 }
 

@@ -5,7 +5,7 @@
 //  Created by Esekiel Surbakti on 14/02/26.
 //
 
-public struct Genre: Codable, Sendable {
+public struct Genre: Codable, Hashable, Sendable {
     public let id: Int
     public let name: String
     

@@ -7,6 +7,7 @@
 
 import Model
 
+#if DEBUG
 public final class FakeDetailsRepository: DetailsRepositoryProtocol {
     
     public init() {}
@@ -15,3 +16,4 @@ public final class FakeDetailsRepository: DetailsRepositoryProtocol {
         MovieDetails.stub
     }
 }
+#endif
