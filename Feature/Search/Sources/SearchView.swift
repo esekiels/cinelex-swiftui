@@ -42,7 +42,7 @@ public struct SearchView: View {
             .navigationTitle(LocalizeConstant.search)
             .searchable(
                 text: $viewModel.query,
-                prompt: "Search movies..."
+                prompt: Text(LocalizeConstant.searchPrompt)
             )
             .task {
                 viewModel.loadRecommendations()
@@ -58,7 +58,7 @@ public struct SearchView: View {
     private var recommendationList: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text("Recommendations")
+                Text(LocalizeConstant.recommendations)
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.horizontal, 16)

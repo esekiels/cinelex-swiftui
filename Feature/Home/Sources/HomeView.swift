@@ -60,16 +60,29 @@ public struct HomeView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     @Bindable var preferences = preferences
-                    Menu {
-                        Picker("Theme", selection: $preferences.theme) {
-                            ForEach(AppTheme.allCases, id: \.self) { option in
-                                Label(option.title, systemImage: option.icon)
-                                    .tag(option)
+                    HStack(spacing: 16) {
+                        Menu {
+                            Picker("Language", selection: $preferences.locale) {
+                                ForEach(AppLocale.allCases, id: \.self) { option in
+                                    Label(option.title, systemImage: option.icon)
+                                        .tag(option)
+                                }
                             }
+                        } label: {
+                            Image(systemName: preferences.locale.icon)
+                                .accessibilityLabel("localeIcon")
                         }
-                    } label: {
-                        Image(systemName: preferences.theme.icon)
-                            .accessibilityLabel("themeIcon")
+                        Menu {
+                            Picker("Theme", selection: $preferences.theme) {
+                                ForEach(AppTheme.allCases, id: \.self) { option in
+                                    Label(option.title, systemImage: option.icon)
+                                        .tag(option)
+                                }
+                            }
+                        } label: {
+                            Image(systemName: preferences.theme.icon)
+                                .accessibilityLabel("themeIcon")
+                        }
                     }
                 }
             }

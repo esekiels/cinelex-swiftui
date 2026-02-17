@@ -25,6 +25,7 @@ struct CinelexApp: App {
                 .environment(\.homeFactory, factory)
                 .environment(\.searchFactory, factory)
                 .preferredColorScheme(preferences.theme.colorScheme)
+                .environment(\.locale, preferences.locale.locale)
         }
     }
 }
