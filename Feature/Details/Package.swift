@@ -24,6 +24,13 @@ let package = Package(
                 .product(name: "Design", package: "Design"),
                 .product(name: "Kingfisher", package: "Kingfisher")
             ],
+        ),
+        .testTarget(
+            name: "DetailsTests",
+            dependencies: [
+                "Details",
+                .product(name: "Data", package: "Data")
+            ]
         )
     ]
 )
