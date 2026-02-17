@@ -24,27 +24,32 @@ public class HomeViewModel: BaseViewModel {
     public init(repository: HomeRepositoryProtocol) {
         self.repository = repository
     }
-
-    func refresh() async {
+    
+    func fetchMovies(forceRefresh: Bool = false) {
+        guard !state.isIdle || forceRefresh else {
+            return
+        }
         state = .loading
 
-        do {
-            async let nowPlayingResult = repository.fetchNowPlaying()
-            async let popularResult = repository.fetchPopular()
-            async let upcomingResult = repository.fetchUpcoming()
-            async let topRatedResult = repository.fetchTopRated()
+        Task {
+            do {
+                async let nowPlayingResult = repository.fetchNowPlaying()
+                async let popularResult = repository.fetchPopular()
+                async let upcomingResult = repository.fetchUpcoming()
+                async let topRatedResult = repository.fetchTopRated()
 
-            nowPlaying = try await nowPlayingResult
-            popular = try await popularResult
-            upcoming = try await upcomingResult
-            topRated = try await topRatedResult
+                nowPlaying = try await nowPlayingResult
+                popular = try await popularResult
+                upcoming = try await upcomingResult
+                topRated = try await topRatedResult
 
-            await repository.fetchGenres()
+                await repository.fetchGenres()
 
-            state = .idle
-        } catch {
-            let cinelexError = handleError(error)
-            state = .error(cinelexError)
+                state = .idle
+            } catch {
+                let cinelexError = handleError(error)
+                state = .error(cinelexError)
+            }
         }
     }
 }

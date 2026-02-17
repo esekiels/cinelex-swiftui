@@ -52,11 +52,11 @@ public struct HomeView: View {
                 .padding(.vertical, 16)
             }
             .task {
-                await viewModel.refresh()
+                viewModel.fetchMovies()
             }
             .navigationTitle(LocalizeConstant.app)
             .refreshable {
-                await viewModel.refresh()
+                viewModel.fetchMovies(forceRefresh: true)
             }
             .navigationDestination(for: Movie.self) { movie in
                 if let factory {
