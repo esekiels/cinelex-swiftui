@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BF1D5FE02F39E958002DE60B /* Splash in Frameworks */ = {isa = PBXBuildFile; productRef = BF1D5FDF2F39E958002DE60B /* Splash */; };
+		BF5826BF2F3A23A00035D267 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = BF5826BE2F3A23A00035D267 /* Home */; };
+		BF5826C22F3A35830035D267 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BF5826C12F3A35830035D267 /* Kingfisher */; };
+		BF805A372F40C9DD00876064 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = BF805A362F40C9DD00876064 /* Search */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		BF2396A22F39B02C0085016E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -28,12 +35,37 @@
 		BF2396A12F39B02C0085016E /* CinelexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CinelexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF2396AB2F39B02C0085016E /* CinelexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CinelexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF2396CA2F39B0390085016E /* Cinelex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Cinelex.xcodeproj; sourceTree = "<group>"; };
-		BF2396D82F39B04A0085016E /* Cinelex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Cinelex.xcodeproj; sourceTree = "<group>"; };
+		BF2397052F39B3460085016E /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Common; path = Core/Common; sourceTree = SOURCE_ROOT; };
+		BF2397062F39B3640085016E /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Model; path = Core/Model; sourceTree = SOURCE_ROOT; };
+		BF2397072F39B3780085016E /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Core/Network; sourceTree = SOURCE_ROOT; };
+		BF2397082F39B3890085016E /* Design */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Design; path = Core/Design; sourceTree = SOURCE_ROOT; };
+		BF2397092F39B3A80085016E /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Navigation; path = Core/Navigation; sourceTree = SOURCE_ROOT; };
+		BF23970A2F39B4400085016E /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Database; path = Core/Database; sourceTree = SOURCE_ROOT; };
+		BF23970B2F39B4540085016E /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = Core/Data; sourceTree = SOURCE_ROOT; };
+		BF5826AC2F3A23350035D267 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Home; path = Feature/Home; sourceTree = SOURCE_ROOT; };
+		BF805A242F40C34200876064 /* Search */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Search; path = Feature/Search; sourceTree = SOURCE_ROOT; };
+		BFD687452F3E19270081393D /* Details */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Details; path = Feature/Details; sourceTree = SOURCE_ROOT; };
+		BFD6877A2F3E30C20081393D /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllTests.xctestplan; sourceTree = "<group>"; };
+		BFD8C2332F44180D00695A8F /* Datastore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Datastore; path = Core/Datastore; sourceTree = SOURCE_ROOT; };
+		BFDDD34C2F39E4EB0040B38B /* Splash */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Splash; path = Feature/Splash; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BFDDD33F2F39D7CB0040B38B /* Exceptions for "Cinelex" folder in "Cinelex" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BF2396932F39B02A0085016E /* Cinelex */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BF2396962F39B02A0085016E /* Cinelex */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BFDDD33F2F39D7CB0040B38B /* Exceptions for "Cinelex" folder in "Cinelex" target */,
+			);
 			path = Cinelex;
 			sourceTree = "<group>";
 		};
@@ -54,6 +86,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF805A372F40C9DD00876064 /* Search in Frameworks */,
+				BF5826C22F3A35830035D267 /* Kingfisher in Frameworks */,
+				BF1D5FE02F39E958002DE60B /* Splash in Frameworks */,
+				BF5826BF2F3A23A00035D267 /* Home in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,9 +113,13 @@
 		BF23968B2F39B02A0085016E = {
 			isa = PBXGroup;
 			children = (
+				BFD6877A2F3E30C20081393D /* AllTests.xctestplan */,
+				BF2396F02F39B2470085016E /* Feature */,
+				BF2396EF2F39B23A0085016E /* Core */,
 				BF2396962F39B02A0085016E /* Cinelex */,
 				BF2396A42F39B02C0085016E /* CinelexTests */,
 				BF2396AE2F39B02C0085016E /* CinelexUITests */,
+				BFDDD2F02F39B6C90040B38B /* Frameworks */,
 				BF2396952F39B02A0085016E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,11 +141,37 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BF2396DB2F39B04A0085016E /* Products */ = {
+		BF2396EF2F39B23A0085016E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BF23970B2F39B4540085016E /* Data */,
+				BF23970A2F39B4400085016E /* Database */,
+				BF2397072F39B3780085016E /* Network */,
+				BFD8C2332F44180D00695A8F /* Datastore */,
+				BF2397062F39B3640085016E /* Model */,
+				BF2397092F39B3A80085016E /* Navigation */,
+				BF2397082F39B3890085016E /* Design */,
+				BF2397052F39B3460085016E /* Common */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		BF2396F02F39B2470085016E /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				BF805A242F40C34200876064 /* Search */,
+				BFD687452F3E19270081393D /* Details */,
+				BF5826AC2F3A23350035D267 /* Home */,
+				BFDDD34C2F39E4EB0040B38B /* Splash */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		BFDDD2F02F39B6C90040B38B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Products;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +184,7 @@
 				BF2396902F39B02A0085016E /* Sources */,
 				BF2396912F39B02A0085016E /* Frameworks */,
 				BF2396922F39B02A0085016E /* Resources */,
+				BFDDD3452F39E02D0040B38B /* SwiftLint Run Script */,
 			);
 			buildRules = (
 			);
@@ -128,6 +195,10 @@
 			);
 			name = Cinelex;
 			packageProductDependencies = (
+				BF1D5FDF2F39E958002DE60B /* Splash */,
+				BF5826BE2F3A23A00035D267 /* Home */,
+				BF5826C12F3A35830035D267 /* Kingfisher */,
+				BF805A362F40C9DD00876064 /* Search */,
 			);
 			productName = Cinelex;
 			productReference = BF2396942F39B02A0085016E /* Cinelex.app */;
@@ -211,6 +282,10 @@
 			);
 			mainGroup = BF23968B2F39B02A0085016E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BFDDD34B2F39E2D90040B38B /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				BF5826C02F3A35830035D267 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BF2396952F39B02A0085016E /* Products */;
 			projectDirPath = "";
@@ -218,10 +293,6 @@
 				{
 					ProductGroup = BF2396CB2F39B0390085016E /* Products */;
 					ProjectRef = BF2396CA2F39B0390085016E /* Cinelex.xcodeproj */;
-				},
-				{
-					ProductGroup = BF2396DB2F39B04A0085016E /* Products */;
-					ProjectRef = BF2396D82F39B04A0085016E /* Cinelex.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -256,6 +327,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BFDDD3452F39E02D0040B38B /* SwiftLint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BF2396902F39B02A0085016E /* Sources */ = {
@@ -297,6 +390,8 @@
 /* Begin XCBuildConfiguration section */
 		BF2396B32F39B02C0085016E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = BF2396962F39B02A0085016E /* Cinelex */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -361,6 +456,8 @@
 		};
 		BF2396B42F39B02C0085016E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = BF2396962F39B02A0085016E /* Cinelex */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -418,6 +515,8 @@
 		};
 		BF2396B62F39B02C0085016E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = BF2396962F39B02A0085016E /* Cinelex */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -425,7 +524,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W3UM55KY7Y;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cinelex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -455,6 +556,8 @@
 		};
 		BF2396B72F39B02C0085016E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = BF2396962F39B02A0085016E /* Cinelex */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -462,7 +565,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W3UM55KY7Y;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cinelex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -614,6 +719,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BF5826C02F3A35830035D267 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.2;
+			};
+		};
+		BFDDD34B2F39E2D90040B38B /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.63.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BF1D5FDF2F39E958002DE60B /* Splash */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Splash;
+		};
+		BF5826BE2F3A23A00035D267 /* Home */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Home;
+		};
+		BF5826C12F3A35830035D267 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF5826C02F3A35830035D267 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		BF805A362F40C9DD00876064 /* Search */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Search;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BF23968C2F39B02A0085016E /* Project object */;
 }

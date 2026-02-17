@@ -5,20 +5,36 @@
 //  Created by Esekiel Surbakti on 09/02/26.
 //
 
-import SwiftUI
+import Design
+import Navigation
+import Splash
+import Home
 
 struct ContentView: View {
+    
+    @Environment(CinelexCoordinator.self) private var coordinator
+    @Environment(\.factory) private var factory
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+            switch coordinator.route {
+            case .splash:
+                SplashView()
+            case .home:
+                CinelexTabView()
+            }
         }
-        .padding()
     }
 }
 
-#Preview {
+#Preview("Light") {
     ContentView()
+        .environment(CinelexCoordinator())
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark") {
+    ContentView()
+        .environment(CinelexCoordinator())
+        .preferredColorScheme(.dark)
 }

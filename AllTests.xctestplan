@@ -1,0 +1,59 @@
+{
+  "configurations" : [
+    {
+      "id" : "8C04BD4B-32AF-4276-B01B-2BBA040020C6",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Feature\/Search",
+        "identifier" : "SearchTests",
+        "name" : "SearchTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Feature\/Details",
+        "identifier" : "DetailsTests",
+        "name" : "DetailsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Core\/Data",
+        "identifier" : "DataTests",
+        "name" : "DataTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Core\/Network",
+        "identifier" : "NetworkTests",
+        "name" : "NetworkTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Feature\/Home",
+        "identifier" : "HomeTests",
+        "name" : "HomeTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Core\/Database",
+        "identifier" : "DatabaseTests",
+        "name" : "DatabaseTests"
+      }
+    }
+  ],
+  "version" : 1
+}
