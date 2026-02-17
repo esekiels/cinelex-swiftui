@@ -43,18 +43,18 @@ public final class MovieService: MovieServiceProtocol {
     }
     
     public func fetchDetails(_ movieId: Int) async throws -> MovieDetails {
-        let url = "\(ApiEnvironment.baseUrl)\(ApiConstant.details.rawValue)?append_to_response=videos,credits"
+        let url = "\(ApiEnvironment.baseUrl)\(ApiConstant.details.rawValue)?append_to_response=videos,credits&language=\(ApiEnvironment.language)"
             .replacingOccurrences(of: "{movie_id}", with: "\(movieId)")
         return try await apiManager.get(url, token: ApiEnvironment.token)
     }
     
     public func searchMovies(_ query: String, page: Int) async throws -> MovieResponse {
-        let url = "\(ApiEnvironment.baseUrl)\(ApiConstant.search.rawValue)?query=\(query)&language=en-US&page=\(page)"
+        let url = "\(ApiEnvironment.baseUrl)\(ApiConstant.search.rawValue)?query=\(query)&language=\(ApiEnvironment.language)&page=\(page)"
         return try await apiManager.get(url, token: ApiEnvironment.token)
     }
-    
+
     private func fetchMovies(_ endpoint: ApiConstant) async throws -> [Movie] {
-        let url = "\(ApiEnvironment.baseUrl)\(endpoint.rawValue)?&includelanguage=en-US&page=1"
+        let url = "\(ApiEnvironment.baseUrl)\(endpoint.rawValue)?language=\(ApiEnvironment.language)&page=1"
         let response: MovieResponse = try await apiManager.get(url, token: ApiEnvironment.token)
         return response.results
     }

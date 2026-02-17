@@ -21,7 +21,7 @@ public final class GenreService: GenreServiceProtocol {
     }
     
     public func fetchGenres() async throws -> [Genre] {
-        let url = "\(ApiEnvironment.baseUrl)\(ApiConstant.genres.rawValue)?language=en-US"
+        let url = "\(ApiEnvironment.baseUrl)\(ApiConstant.genres.rawValue)?language=\(ApiEnvironment.language)"
         let response: GenreResponse = try await apiManager.get(url, token: ApiEnvironment.token)
         return response.results
     }

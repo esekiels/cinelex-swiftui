@@ -13,14 +13,18 @@ public final class UserPreferences: @unchecked Sendable {
     private let defaults = UserDefaults.standard
 
     public var theme: AppTheme {
-        get {
-            let raw = defaults.string(forKey: "app_theme") ?? ""
-            return AppTheme(rawValue: raw) ?? .system
-        }
-        set {
-            defaults.set(newValue.rawValue, forKey: "app_theme")
-        }
+        didSet { defaults.set(theme.rawValue, forKey: "app_theme") }
     }
 
-    public init() {}
+    public var locale: AppLocale {
+        didSet { defaults.set(locale.rawValue, forKey: "app_locale") }
+    }
+
+    public init() {
+        let themeRaw = UserDefaults.standard.string(forKey: "app_theme") ?? ""
+        self.theme = AppTheme(rawValue: themeRaw) ?? .system
+
+        let localeRaw = UserDefaults.standard.string(forKey: "app_locale") ?? ""
+        self.locale = AppLocale(rawValue: localeRaw) ?? .system
+    }
 }

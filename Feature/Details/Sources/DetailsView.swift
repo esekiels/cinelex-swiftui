@@ -126,7 +126,7 @@ public struct DetailsView: View {
     private func castSection(_ movie: MovieDetails) -> some View {
         if let cast = movie.cast, !cast.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Cast")
+                Text(LocalizeConstant.cast)
                     .font(.headline)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -179,12 +179,12 @@ public struct DetailsView: View {
         
         if !directors.isEmpty || !producers.isEmpty || !writers.isEmpty {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Crew")
+                Text(LocalizeConstant.crew)
                     .font(.headline)
                 
-                crewRow("Director", crew: directors)
-                crewRow("Producer", crew: producers)
-                crewRow("Writer", crew: writers)
+                crewRow(LocalizeConstant.director, crew: directors)
+                crewRow(LocalizeConstant.producer, crew: producers)
+                crewRow(LocalizeConstant.writer, crew: writers)
             }
         }
     }
@@ -209,7 +209,7 @@ public struct DetailsView: View {
     private func trailerSection(_ movie: MovieDetails) -> some View {
         if let trailers = movie.youtubeTrailers, !trailers.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Trailers")
+                Text(LocalizeConstant.trailers)
                     .font(.headline)
                 
                 ForEach(trailers) { trailer in
