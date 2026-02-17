@@ -184,6 +184,9 @@ opt_in_rules: # some rules are only opt-in
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
   - Pods
+  - "**/resource_bundle_accessor.swift"
+  - "**/.build"
+  - "**/DerivedData"
   
 custom_rules:
   force_https:

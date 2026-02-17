@@ -14,16 +14,16 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Core\/Database",
-        "identifier" : "DatabaseTests",
-        "name" : "DatabaseTests"
+        "containerPath" : "container:Feature\/Search",
+        "identifier" : "SearchTests",
+        "name" : "SearchTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Core\/Network",
-        "identifier" : "NetworkTests",
-        "name" : "NetworkTests"
+        "containerPath" : "container:Feature\/Details",
+        "identifier" : "DetailsTests",
+        "name" : "DetailsTests"
       }
     },
     {
@@ -35,9 +35,23 @@
     },
     {
       "target" : {
+        "containerPath" : "container:Core\/Network",
+        "identifier" : "NetworkTests",
+        "name" : "NetworkTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:Feature\/Home",
         "identifier" : "HomeTests",
         "name" : "HomeTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Core\/Database",
+        "identifier" : "DatabaseTests",
+        "name" : "DatabaseTests"
       }
     }
   ],

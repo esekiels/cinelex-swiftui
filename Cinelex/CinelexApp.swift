@@ -20,6 +20,7 @@ struct CinelexApp: App {
                 .environment(coordinator)
                 .environment(\.factory, factory)
                 .environment(\.homeFactory, factory)
+                .environment(\.searchFactory, factory)
         }
     }
 }

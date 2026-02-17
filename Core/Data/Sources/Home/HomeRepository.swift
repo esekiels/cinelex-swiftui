@@ -15,17 +15,26 @@ public protocol HomeRepositoryProtocol: Sendable {
     func fetchUpcoming() async throws -> [Movie]
     func fetchPopular() async throws -> [Movie]
     func fetchTopRated() async throws -> [Movie]
+    func fetchGenres() async
 }
 
 public final class HomeRepository: HomeRepositoryProtocol {
     
-    private let dao: MovieDaoProtocol
     private let service: MovieServiceProtocol
+    private let genreService: GenreServiceProtocol
+    private let dao: MovieDaoProtocol
+    private let genreDao: GenreDaoProtocol
     
-    public init(dao: MovieDaoProtocol, service: MovieServiceProtocol) {
-        self.dao = dao
-        self.service = service
-    }
+    public init(
+        service: MovieServiceProtocol,
+        genreService: GenreServiceProtocol,
+        dao: MovieDaoProtocol,
+        genreDao: GenreDaoProtocol) {
+            self.service = service
+            self.genreService = genreService
+            self.dao = dao
+            self.genreDao = genreDao
+        }
     
     public func fetchNowPlaying() async throws -> [Movie] {
         try await fetchMovies(category: "nowPlaying", remoteFetch: service.fetchNowPlaying)
@@ -41,6 +50,17 @@ public final class HomeRepository: HomeRepositoryProtocol {
     
     public func fetchTopRated() async throws -> [Movie] {
         try await fetchMovies(category: "topRated", remoteFetch: service.fetchTopRated)
+    }
+    
+    public func fetchGenres() async {
+        do {
+            let genres = try await genreService.fetchGenres()
+            try await genreDao.deleteAll()
+            try await genreDao.save(genres)
+            CinelexLogger.debug("Saved \(genres.count) genres")
+        } catch {
+            CinelexLogger.error("Failed genres: \(error)")
+        }
     }
     
     private func fetchMovies(

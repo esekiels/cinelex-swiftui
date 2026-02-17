@@ -3,12 +3,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "Details",
+    name: "Search",
     platforms: [.iOS(.v17)],
     products: [
         .library(
-            name: "Details",
-            targets: ["Details"]
+            name: "Search",
+            targets: ["Search"]
         )
     ],
     dependencies: [
@@ -18,7 +18,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Details",
+            name: "Search",
             dependencies: [
                 .product(name: "Data", package: "Data"),
                 .product(name: "Design", package: "Design"),
@@ -26,9 +26,9 @@ let package = Package(
             ],
         ),
         .testTarget(
-            name: "DetailsTests",
+            name: "SearchTests",
             dependencies: [
-                "Details",
+                "Search",
                 .product(name: "Data", package: "Data")
             ]
         )

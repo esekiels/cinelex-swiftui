@@ -7,6 +7,7 @@
 
 import Model
 
+#if DEBUG
 public final class FakeHomeRepository: HomeRepositoryProtocol {
     
     public init() {}
@@ -26,4 +27,7 @@ public final class FakeHomeRepository: HomeRepositoryProtocol {
     public func fetchTopRated() async throws -> [Movie] {
         Movie.stubs
     }
+    
+    public func fetchGenres() async {}
 }
+#endif

@@ -10,7 +10,7 @@ import SwiftData
 @testable import Database
 import Model
 
-struct MovieDaoTests {
+@Suite struct MovieDaoTests {
     
     @Test func saveAndFetch() async throws {
         let sut = try makeSUT()

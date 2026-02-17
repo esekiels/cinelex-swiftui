@@ -41,4 +41,6 @@ final actor MockHomeRepository: HomeRepositoryProtocol {
         if shouldThrowError { throw NSError(domain: "test", code: -1) }
         return mockMovies
     }
+    
+    func fetchGenres() async {}
 }

@@ -40,8 +40,8 @@ extension MovieEntity {
         self.init(
             movieId: movie.id,
             title: movie.title,
-            posterPath: movie.posterPath,
-            backdropPath: movie.backdropPath,
+            posterPath: movie.posterPath ?? "",
+            backdropPath: movie.backdropPath ?? "",
             category: category
         )
     }

@@ -24,44 +24,29 @@ public struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    section(
-                        state: viewModel.nowPlayingState,
-                        style: .poster
-                    ) {
+                    switch viewModel.state {
+                    case .idle:
                         HomePosterCarousel(
                             title: LocalizeConstant.nowPlaying,
                             data: viewModel.nowPlaying
                         )
-                    }
-                    
-                    section(
-                        state: viewModel.popularState,
-                        style: .backdrop
-                    ) {
                         HomeBackdropCarousel(
                             title: LocalizeConstant.popular,
                             data: viewModel.popular
                         )
-                    }
-                    
-                    section(
-                        state: viewModel.topRatedState,
-                        style: .poster
-                    ) {
                         HomePosterCarousel(
                             title: LocalizeConstant.topRated,
                             data: viewModel.topRated
                         )
-                    }
-                    
-                    section(
-                        state: viewModel.upcomingState,
-                        style: .backdrop
-                    ) {
                         HomeBackdropCarousel(
                             title: LocalizeConstant.upcoming,
                             data: viewModel.upcoming
                         )
+                    default:
+                        HomeSkeletonView(style: .poster)
+                        HomeSkeletonView(style: .backdrop)
+                        HomeSkeletonView(style: .poster)
+                        HomeSkeletonView(style: .backdrop)
                     }
                 }
                 .padding(.vertical, 16)
@@ -78,20 +63,6 @@ public struct HomeView: View {
                     factory.makeDetailsView(movie.id)
                 }
             }
-        }
-    }
-    
-    @ViewBuilder
-    private func section<Content: View>(
-        state: UiState,
-        style: CarouselStyle,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        switch state {
-        case .idle:
-            content()
-        default:
-            HomeSkeletonView(style: style)
         }
     }
 }

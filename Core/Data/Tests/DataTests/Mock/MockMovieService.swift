@@ -13,6 +13,7 @@ final actor MockMovieService: MovieServiceProtocol {
     
     private var mockMovies: [Movie] = []
     private var mockDetails: MovieDetails = MovieDetails.stub
+    private var mockSearchResponse: MovieResponse = MovieResponse(page: 1, results: [], totalPages: 1, totalResults: 0)
     var shouldThrowError = false
     var errorToThrow: Error?
     
@@ -21,9 +22,16 @@ final actor MockMovieService: MovieServiceProtocol {
     private(set) var fetchTopRatedCalled = false
     private(set) var fetchUpcomingCalled = false
     private(set) var fetchDetailsCalled = false
+    private(set) var searchMoviesCalled = false
+    private(set) var lastSearchQuery: String?
+    private(set) var lastSearchPage: Int?
     
     func setMockMovies(_ movies: [Movie]) {
         mockMovies = movies
+    }
+    
+    func setMockSearchResponse(_ response: MovieResponse) {
+        mockSearchResponse = response
     }
     
     func setShouldThrowError(_ value: Bool) {
@@ -58,5 +66,13 @@ final actor MockMovieService: MovieServiceProtocol {
         fetchDetailsCalled = true
         if shouldThrowError { throw errorToThrow ?? NSError(domain: "", code: 0) }
         return mockDetails
+    }
+    
+    func searchMovies(_ query: String, page: Int) async throws -> MovieResponse {
+        searchMoviesCalled = true
+        lastSearchQuery = query
+        lastSearchPage = page
+        if shouldThrowError { throw errorToThrow ?? NSError(domain: "", code: 0) }
+        return mockSearchResponse
     }
 }
