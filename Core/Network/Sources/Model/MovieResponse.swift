@@ -7,7 +7,7 @@
 
 import Model
 
-public struct MovieResponse: Decodable {
+public struct MovieResponse: Decodable, Sendable {
     
     public let page: Int
     public var results: [Movie]

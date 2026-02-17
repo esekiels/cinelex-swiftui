@@ -92,4 +92,33 @@ import Common
             _ = try await sut.fetchDetails(278)
         }
     }
+    
+    // MARK: - Search Movies
+    
+    @Test func searchMoviesSuccess() async throws {
+        let (sut, mock) = makeSUT()
+        let expectedResponse = JsonLoader.load("NowPlayingResponse", as: MovieResponse.self)
+        mock.setMockResponse(for: "search", response: expectedResponse)
+
+        let response = try await sut.searchMovies("shaw", page: 1)
+
+        #expect(mock.getCalled == true)
+        #expect(response.results.count == expectedResponse.results.count)
+        #expect(response.results[0].id == expectedResponse.results[0].id)
+        #expect(response.results[0].title == expectedResponse.results[0].title)
+        #expect(response.page == expectedResponse.page)
+        #expect(mock.lastURL?.contains("search") ?? false)
+        #expect(mock.lastURL?.contains("query=shaw") ?? false)
+        #expect(mock.lastURL?.contains("page=1") ?? false)
+    }
+
+    @Test func searchMoviesFailure() async {
+        let (sut, mock) = makeSUT()
+        mock.shouldThrowError = true
+        mock.errorToThrow = CinelexApiError.unknownError(message: "Network error")
+
+        await #expect(throws: CinelexApiError.self) {
+            _ = try await sut.searchMovies("shaw", page: 1)
+        }
+    }
 }

@@ -14,13 +14,6 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Core\/Database",
-        "identifier" : "DatabaseTests",
-        "name" : "DatabaseTests"
-      }
-    },
-    {
-      "target" : {
         "containerPath" : "container:Core\/Network",
         "identifier" : "NetworkTests",
         "name" : "NetworkTests"
@@ -31,6 +24,20 @@
         "containerPath" : "container:Core\/Data",
         "identifier" : "DataTests",
         "name" : "DataTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Feature\/Search",
+        "identifier" : "SearchTests",
+        "name" : "SearchTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Core\/Database",
+        "identifier" : "DatabaseTests",
+        "name" : "DatabaseTests"
       }
     },
     {
