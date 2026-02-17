@@ -46,6 +46,7 @@
 		BF805A242F40C34200876064 /* Search */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Search; path = Feature/Search; sourceTree = SOURCE_ROOT; };
 		BFD687452F3E19270081393D /* Details */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Details; path = Feature/Details; sourceTree = SOURCE_ROOT; };
 		BFD6877A2F3E30C20081393D /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllTests.xctestplan; sourceTree = "<group>"; };
+		BFD8C2332F44180D00695A8F /* Datastore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Datastore; path = Core/Datastore; sourceTree = SOURCE_ROOT; };
 		BFDDD34C2F39E4EB0040B38B /* Splash */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Splash; path = Feature/Splash; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -146,6 +147,7 @@
 				BF23970B2F39B4540085016E /* Data */,
 				BF23970A2F39B4400085016E /* Database */,
 				BF2397072F39B3780085016E /* Network */,
+				BFD8C2332F44180D00695A8F /* Datastore */,
 				BF2397062F39B3640085016E /* Model */,
 				BF2397092F39B3A80085016E /* Navigation */,
 				BF2397082F39B3890085016E /* Design */,

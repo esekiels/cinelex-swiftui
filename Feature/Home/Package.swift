@@ -13,14 +13,16 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Details"),
-        .package(path: "../Core/Data")
+        .package(path: "../Core/Data"),
+        .package(path: "../Core/Datastore")
     ],
     targets: [
         .target(
             name: "Home",
             dependencies: [
                 .product(name: "Details", package: "Details"),
-                .product(name: "Data", package: "Data")
+                .product(name: "Data", package: "Data"),
+                .product(name: "Datastore", package: "Datastore")
             ],
         ),
         .testTarget(

@@ -7,15 +7,17 @@
 
 import Common
 import Data
+import Datastore
 import Design
 import Model
 import Details
 
 public struct HomeView: View {
-    
+
     @State private var viewModel: HomeViewModel
+    @Environment(UserPreferences.self) private var preferences
     @Environment(\.homeFactory) private var factory
-    
+
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
     }
@@ -52,11 +54,27 @@ public struct HomeView: View {
                 .padding(.vertical, 16)
             }
             .task {
-                await viewModel.refresh()
+                viewModel.fetchMovies()
             }
             .navigationTitle(LocalizeConstant.app)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    @Bindable var preferences = preferences
+                    Menu {
+                        Picker("Theme", selection: $preferences.theme) {
+                            ForEach(AppTheme.allCases, id: \.self) { option in
+                                Label(option.title, systemImage: option.icon)
+                                    .tag(option)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: preferences.theme.icon)
+                            .accessibilityLabel("themeIcon")
+                    }
+                }
+            }
             .refreshable {
-                await viewModel.refresh()
+                viewModel.fetchMovies(forceRefresh: true)
             }
             .navigationDestination(for: Movie.self) { movie in
                 if let factory {
@@ -78,6 +96,7 @@ enum CarouselStyle {
             repository: FakeHomeRepository()
         )
     )
+    .environment(UserPreferences())
     .preferredColorScheme(.light)
 }
 
@@ -87,5 +106,6 @@ enum CarouselStyle {
             repository: FakeHomeRepository()
         )
     )
+    .environment(UserPreferences())
     .preferredColorScheme(.dark)
 }
