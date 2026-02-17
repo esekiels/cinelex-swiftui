@@ -9,4 +9,4 @@
 // https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
 
 BASE_URL = https:/$()/api.themoviedb.org/3/
-TOKEN = eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTQ2YmU1OWQwYWQwNTFhYzNmY2FjOGE4ODY4NjNlZiIsIm5iZiI6MTU2MTI3MjQxNC4zMzMsInN1YiI6IjVkMGYyMDVlMGUwYTI2MTA5MmNjMTY3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TfrjkpxcqPC9PU9tj0oMjXUnJZhsW0eIACfYUpUr3fI
+TOKEN = YOUR_TMDB_TOKEN_HERE

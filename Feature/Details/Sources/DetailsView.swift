@@ -41,6 +41,7 @@ public struct DetailsView: View {
             }
         }
         .navigationTitle(viewModel.title)
+        .toolbar(.hidden, for: .tabBar)
     }
     
     // MARK: - Content
