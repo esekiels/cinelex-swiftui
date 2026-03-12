@@ -5,7 +5,7 @@
 //  Created by Esekiel Surbakti on 11/02/26.
 //
 
-@testable import Network
+@testable import Networking
 import Common
 
 final class MockApiManager: ApiManager, @unchecked Sendable {

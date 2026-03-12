@@ -7,7 +7,7 @@
 
 import Data
 import Database
-import Network
+import Networking
 import SwiftUI
 import Home
 import Details
@@ -15,34 +15,25 @@ import Search
 
 @MainActor
 public final class CinelexDIFactory: HomeFactory, SearchFactory {
+    
+    private lazy var movieRepository: MovieRepositoryProtocol = {
+        MovieRepository(service: MovieService(), dao: MovieDao())
+    }()
 
-    private lazy var homeRepository: HomeRepositoryProtocol = {
-        HomeRepository(
-            service: MovieService(),
-            genreService: GenreService(),
-            dao: MovieDao(),
-            genreDao: GenreDao()
-        )
-    }()
-    
-    private lazy var detailsRepository: DetailsRepositoryProtocol = {
-        DetailsRepository(service: MovieService(), dao: MovieDetailsDao())
-    }()
-    
-    private lazy var searchRepository: SearchRepositoryProtocol = {
-       SearchRepository(service: MovieService(), genreDao: GenreDao(), movieDao: MovieDao())
+    private lazy var genreRepository: GenreRepositoryProtocol = {
+        GenreRepository(service: GenreService(), dao: GenreDao())
     }()
     
     public func injectHomeViewModel() -> HomeViewModel {
-        HomeViewModel(repository: homeRepository)
+        HomeViewModel(repository: movieRepository)
     }
     
     public func injectDetailsViewModel(_ movieId: Int) -> DetailsViewModel {
-        DetailsViewModel(repository: detailsRepository, movieId: movieId)
+        DetailsViewModel(repository: movieRepository, movieId: movieId)
     }
     
     public func injectSearchViewModel() -> SearchViewModel {
-        SearchViewModel(repository: searchRepository)
+        SearchViewModel(movieRepository: movieRepository, genreRepository: genreRepository)
     }
     
     // MARK: - Modules DI Factory

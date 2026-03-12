@@ -26,7 +26,7 @@ public final class MovieEntity {
         self.posterPath = posterPath
         self.backdropPath = backdropPath
         self.category = category
-        self.createdAt = Date()
+        self.createdAt = .now
     }
 }
 

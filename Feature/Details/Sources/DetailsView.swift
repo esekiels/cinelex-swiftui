@@ -40,7 +40,6 @@ public struct DetailsView: View {
                 SafariView(url: url)
             }
         }
-        .navigationTitle(viewModel.title)
         .toolbar(.hidden, for: .tabBar)
     }
     
@@ -245,7 +244,7 @@ public struct DetailsView: View {
     NavigationStack {
         DetailsView(
             viewModel: DetailsViewModel(
-                repository: FakeDetailsRepository(),
+                repository: FakeMovieRepository(),
                 movieId: 278
             )
         )

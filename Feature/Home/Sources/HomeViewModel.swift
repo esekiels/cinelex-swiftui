@@ -19,37 +19,19 @@ public class HomeViewModel: BaseViewModel {
     private(set) var upcoming: [Movie] = []
     private(set) var topRated: [Movie] = []
 
-    private let repository: HomeRepositoryProtocol
+    private let repository: MovieRepositoryProtocol
 
-    public init(repository: HomeRepositoryProtocol) {
+    public init(repository: MovieRepositoryProtocol) {
         self.repository = repository
     }
     
-    func fetchMovies(forceRefresh: Bool = false) {
-        guard !state.isIdle || forceRefresh else {
-            return
-        }
+    func fetchMovies() {
         state = .loading
 
-        Task {
-            do {
-                async let nowPlayingResult = repository.fetchNowPlaying()
-                async let popularResult = repository.fetchPopular()
-                async let upcomingResult = repository.fetchUpcoming()
-                async let topRatedResult = repository.fetchTopRated()
-
-                nowPlaying = try await nowPlayingResult
-                popular = try await popularResult
-                upcoming = try await upcomingResult
-                topRated = try await topRatedResult
-
-                await repository.fetchGenres()
-
-                state = .idle
-            } catch {
-                let cinelexError = handleError(error)
-                state = .error(cinelexError)
-            }
-        }
+        Task { for await items in repository.fetchNowPlaying() { nowPlaying = items } }
+        Task { for await items in repository.fetchPopular() { popular = items } }
+        Task { for await items in repository.fetchUpcoming() { upcoming = items } }
+        Task { for await items in repository.fetchTopRated() { topRated = items } }
+        state = .idle
     }
 }

@@ -12,7 +12,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../Network"),
+        .package(path: "../Networking"),
         .package(path: "../Database"),
         .package(path: "../Model"),
         .package(path: "../Common")
@@ -21,7 +21,7 @@ let package = Package(
         .target(
             name: "Data",
             dependencies: [
-                .product(name: "Network", package: "Network"),
+                .product(name: "Networking", package: "Networking"),
                 .product(name: "Database", package: "Database"),
                 .product(name: "Model", package: "Model"),
                 .product(name: "Common", package: "Common")
@@ -31,7 +31,7 @@ let package = Package(
             name: "DataTests",
             dependencies: [
                 "Data",
-                .product(name: "Network", package: "Network"),
+                .product(name: "Networking", package: "Networking"),
                 .product(name: "Database", package: "Database"),
                 .product(name: "Model", package: "Model")
             ]
