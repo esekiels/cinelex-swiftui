@@ -106,7 +106,7 @@ enum CarouselStyle {
 #Preview("Light") {
     HomeView(
         viewModel: HomeViewModel(
-            repository: FakeHomeRepository()
+            repository: FakeMovieRepository()
         )
     )
     .environment(UserPreferences())
@@ -116,7 +116,7 @@ enum CarouselStyle {
 #Preview("Dark") {
     HomeView(
         viewModel: HomeViewModel(
-            repository: FakeHomeRepository()
+            repository: FakeMovieRepository()
         )
     )
     .environment(UserPreferences())

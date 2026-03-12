@@ -3,12 +3,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "Network",
+    name: "Networking",
     platforms: [.iOS(.v17)],
     products: [
         .library(
-            name: "Network",
-            targets: ["Network"]
+            name: "Networking",
+            targets: ["Networking"]
         )
     ],
     dependencies: [
@@ -17,16 +17,16 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Network",
+            name: "Networking",
             dependencies: [
                 .product(name: "Model", package: "Model"),
                 .product(name: "Common", package: "Common")
             ]
         ),
         .testTarget(
-            name: "NetworkTests",
+            name: "NetworkingTests",
             dependencies: [
-                "Network",
+                "Networking",
                 .product(name: "Model", package: "Model"),
                 .product(name: "Common", package: "Common")
             ],

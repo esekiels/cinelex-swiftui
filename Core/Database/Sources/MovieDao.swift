@@ -9,10 +9,11 @@ import Foundation
 import Model
 
 public protocol MovieDaoProtocol: Sendable {
-    func fetch(_ category: String) async throws -> [Movie]
-    func save(_ data: [Movie], category: String) async throws
-    func delete(_ category: String) async throws
-    func deleteAll() async throws
+    func fetchMoviesByCategory(_ category: String) async throws -> [Movie]
+    func saveMoviesByCategory(_ data: [Movie], category: String) async throws
+    func clearAllMovies() async throws
+    func fetchMovieDetails(_ movieId: Int) async throws -> MovieDetails?
+    func saveMovieDetails(_ data: MovieDetails) async throws
 }
 
 public actor MovieDao: MovieDaoProtocol {
@@ -25,37 +26,36 @@ public actor MovieDao: MovieDaoProtocol {
         self.modelContext = ModelContext(container)
     }
     
-    public func fetch(_ category: String) async throws -> [Movie] {
+    public func fetchMoviesByCategory(_ category: String) async throws -> [Movie] {
         let descriptor = FetchDescriptor<MovieEntity>(
             predicate: #Predicate { $0.category == category },
             sortBy: [SortDescriptor(\.createdAt)]
         )
         let entities = try modelContext.fetch(descriptor)
-        return entities.map { $0.toDomain() }
+        return entities.toDomain()
     }
     
-    public func save(_ data: [Movie], category: String) async throws {
-        try await delete(category)
-        
+    public func saveMoviesByCategory(_ data: [Movie], category: String) async throws {
         data.forEach {
             modelContext.insert(MovieEntity($0, category: category))
         }
         try modelContext.save()
     }
     
-    public func delete(_ category: String) async throws {
-        let descriptor = FetchDescriptor<MovieEntity>(
-            predicate: #Predicate { $0.category == category }
-        )
-        let entities = try modelContext.fetch(descriptor)
-        for entity in entities {
-            modelContext.delete(entity)
-        }
+    public func clearAllMovies() async throws {
+        try modelContext.delete(model: MovieEntity.self)
         try modelContext.save()
     }
     
-    public func deleteAll() async throws {
-        try modelContext.delete(model: MovieEntity.self)
+    public func fetchMovieDetails(_ movieId: Int) async throws -> MovieDetails? {
+        let descriptor = FetchDescriptor<MovieDetailsEntity>(
+            predicate: #Predicate { $0.id == movieId }
+        )
+        return try modelContext.fetch(descriptor).first?.toDomain()
+    }
+    
+    public func saveMovieDetails(_ data: MovieDetails) async throws {
+        modelContext.insert(MovieDetailsEntity(data))
         try modelContext.save()
     }
 }

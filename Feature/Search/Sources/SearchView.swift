@@ -227,7 +227,8 @@ public struct SearchView: View {
 #Preview("Light") {
     SearchView(
         viewModel: SearchViewModel(
-            repository: FakeSearchRepository()
+            movieRepository: FakeMovieRepository(),
+            genreRepository: FakeGenreRepository()
         )
     )
     .preferredColorScheme(.light)
@@ -236,7 +237,8 @@ public struct SearchView: View {
 #Preview("Dark") {
     SearchView(
         viewModel: SearchViewModel(
-            repository: FakeSearchRepository()
+            movieRepository: FakeMovieRepository(),
+            genreRepository: FakeGenreRepository()
         )
     )
     .preferredColorScheme(.dark)

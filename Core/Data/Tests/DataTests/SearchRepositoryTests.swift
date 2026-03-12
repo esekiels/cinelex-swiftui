@@ -7,7 +7,7 @@
 
 import Testing
 import Model
-import Network
+import Networking
 @testable import Data
 
 @Suite

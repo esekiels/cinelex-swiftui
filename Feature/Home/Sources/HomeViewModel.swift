@@ -19,9 +19,9 @@ public class HomeViewModel: BaseViewModel {
     private(set) var upcoming: [Movie] = []
     private(set) var topRated: [Movie] = []
 
-    private let repository: HomeRepositoryProtocol
+    private let repository: MovieRepositoryProtocol
 
-    public init(repository: HomeRepositoryProtocol) {
+    public init(repository: MovieRepositoryProtocol) {
         self.repository = repository
     }
     
@@ -42,8 +42,6 @@ public class HomeViewModel: BaseViewModel {
                 popular = try await popularResult
                 upcoming = try await upcomingResult
                 topRated = try await topRatedResult
-
-                await repository.fetchGenres()
 
                 state = .idle
             } catch {

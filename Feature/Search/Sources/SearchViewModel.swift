@@ -25,12 +25,15 @@ public class SearchViewModel: BaseViewModel {
 
     private var currentPage: Int = 1
     private var totalPages: Int = 1
+    private var genres: [Genre] = []
     private var searchTask: Task<Void, Never>?
 
-    private let repository: SearchRepositoryProtocol
+    private let movieRepository: MovieRepositoryProtocol
+    private let genreRepository: GenreRepositoryProtocol
 
-    public init(repository: SearchRepositoryProtocol) {
-        self.repository = repository
+    public init(movieRepository: MovieRepositoryProtocol, genreRepository: GenreRepositoryProtocol) {
+        self.movieRepository = movieRepository
+        self.genreRepository = genreRepository
     }
 
     func loadRecommendations() {
@@ -40,7 +43,7 @@ public class SearchViewModel: BaseViewModel {
 
         Task {
             do {
-                recommendations = try await repository.fetchRecommendations()
+                recommendations = try await movieRepository.fetchPopular()
             } catch {
                 // no-op
             }
@@ -55,8 +58,8 @@ public class SearchViewModel: BaseViewModel {
         Task {
             isLoadingMore = true
             do {
-                let response = try await repository.searchMovies(query, page: currentPage + 1)
-                movies.append(contentsOf: response.results)
+                let response = try await movieRepository.searchMovies(query: query, page: currentPage + 1)
+                movies.append(contentsOf: mapGenres(response.results))
                 currentPage = response.page
                 totalPages = response.totalPages
             } catch {
@@ -91,8 +94,9 @@ public class SearchViewModel: BaseViewModel {
         totalPages = 1
 
         do {
-            let response = try await repository.searchMovies(query, page: 1)
-            movies = response.results
+            try await loadGenresIfNeeded()
+            let response = try await movieRepository.searchMovies(query: query, page: 1)
+            movies = mapGenres(response.results)
             currentPage = response.page
             totalPages = response.totalPages
             state = .idle
@@ -102,6 +106,21 @@ public class SearchViewModel: BaseViewModel {
             }
             let cinelexError = handleError(error)
             state = .error(cinelexError)
+        }
+    }
+
+    private func loadGenresIfNeeded() async throws {
+        guard genres.isEmpty else {
+            return
+        }
+        genres = try await genreRepository.fetchGenres()
+    }
+
+    private func mapGenres(_ movies: [Movie]) -> [Movie] {
+        movies.map { movie in
+            var movie = movie
+            movie.genres = genres.filter { movie.genreIds?.contains($0.id) == true }
+            return movie
         }
     }
 }
