@@ -82,7 +82,8 @@ public struct DetailsView: View {
             Text(movie.title)
                 .font(.title2)
                 .fontWeight(.bold)
-            
+                .foregroundStyle(.textPrimary)
+
             HStack(spacing: 4) {
                 Text(movie.genreFormatted)
                 Text("·")
@@ -91,7 +92,7 @@ public struct DetailsView: View {
                 Text(movie.durationFormatted)
             }
             .font(.subheadline)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.textSecondary)
         }
     }
     
@@ -100,6 +101,7 @@ public struct DetailsView: View {
     private func overview(_ movie: MovieDetails) -> some View {
         Text(movie.overview)
             .font(.body)
+            .foregroundStyle(.textPrimary)
     }
     
     // MARK: - Rating
@@ -116,7 +118,7 @@ public struct DetailsView: View {
             }
             Text(movie.scoreRating)
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.textSecondary)
         }
     }
     
@@ -146,7 +148,7 @@ public struct DetailsView: View {
                 .placeholder {
                     Image(systemName: "person.circle.fill")
                         .resizable()
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(.textSecondary)
                         .accessibilityLabel("profileIcon")
                 }
                 .resizable()
@@ -159,11 +161,12 @@ public struct DetailsView: View {
             Text(member.name)
                 .font(.caption)
                 .fontWeight(.medium)
+                .foregroundStyle(.textPrimary)
                 .lineLimit(1)
-            
+
             Text(member.character)
                 .font(.caption2)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.textSecondary)
                 .lineLimit(1)
         }
         .frame(width: 80)
@@ -195,10 +198,11 @@ public struct DetailsView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                
+                    .foregroundStyle(.textSecondary)
+
                 Text(crew.map(\.name).joined(separator: ", "))
                     .font(.subheadline)
+                    .foregroundStyle(.textPrimary)
             }
         }
     }
@@ -227,6 +231,7 @@ public struct DetailsView: View {
                 Image(systemName: "play.circle.fill")
                     .font(.title3)
                     .accessibilityLabel("trailerPlayIcon")
+                    .foregroundStyle(Color.colorPrimary)
                 Text(trailer.name)
                     .font(.subheadline)
                     .lineLimit(1)
