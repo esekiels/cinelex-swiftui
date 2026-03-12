@@ -56,7 +56,7 @@ public struct SearchView: View {
     // MARK: - Recommendations
 
     private var recommendationList: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
                 Text(LocalizeConstant.recommendations)
                     .font(.title2)
@@ -108,7 +108,7 @@ public struct SearchView: View {
     // MARK: - Movie List
 
     private var movieList: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 12) {
                 ForEach(viewModel.movies) { movie in
                     movieRow(movie)

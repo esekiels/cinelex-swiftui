@@ -46,7 +46,7 @@ public struct DetailsView: View {
     // MARK: - Content
     
     private func content(_ movie: MovieDetails) -> some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
                 backdrop(movie)
                 VStack(alignment: .leading, spacing: 20) {
