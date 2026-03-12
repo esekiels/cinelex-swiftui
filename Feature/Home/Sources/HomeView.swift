@@ -24,7 +24,7 @@ public struct HomeView: View {
     
     public var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
                     switch viewModel.state {
                     case .idle:

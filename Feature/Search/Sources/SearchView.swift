@@ -56,7 +56,7 @@ public struct SearchView: View {
     // MARK: - Recommendations
 
     private var recommendationList: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
                 Text(LocalizeConstant.recommendations)
                     .font(.title2)
@@ -90,13 +90,13 @@ public struct SearchView: View {
                     .font(.subheadline)
                     .bold()
                     .lineLimit(2)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(.textPrimary)
 
                 Spacer()
 
                 Image(systemName: "chevron.right")
                     .font(.headline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.textSecondary)
                     .accessibilityLabel("moreIcon")
             }
             .padding(.horizontal, 16)
@@ -108,7 +108,7 @@ public struct SearchView: View {
     // MARK: - Movie List
 
     private var movieList: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 12) {
                 ForEach(viewModel.movies) { movie in
                     movieRow(movie)
@@ -136,7 +136,7 @@ public struct SearchView: View {
                 Spacer()
                 Image(systemName: "chevron.right")
                     .font(.headline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.textSecondary)
                     .accessibilityLabel("moreIcon")
             }
         }
@@ -162,16 +162,16 @@ public struct SearchView: View {
             Text(movie.title)
                 .font(.headline)
                 .lineLimit(2)
-                .foregroundStyle(.primary)
+                .foregroundStyle(.textPrimary)
 
             HStack(spacing: 8) {
                 Text(Date.from(movie.releaseDate)?.toYearString() ?? "n/a")
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.textSecondary)
 
                 Text("•")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.textSecondary)
 
                 rating(movie)
             }
@@ -189,11 +189,11 @@ public struct SearchView: View {
 
             Text(movie.rating)
                 .font(.subheadline)
-                .foregroundStyle(.primary)
+                .foregroundStyle(.textPrimary)
 
             Text("(\(movie.voteCount))")
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.textSecondary)
         }
     }
 
@@ -217,7 +217,7 @@ public struct SearchView: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
             .background(isPlaceholder ? Color.gray.opacity(0.2) : Color.blue.opacity(0.2))
-            .foregroundStyle(isPlaceholder ? .secondary : .primary)
+            .foregroundStyle(isPlaceholder ? .textSecondary : .textPrimary)
             .clipShape(Capsule())
     }
 }
