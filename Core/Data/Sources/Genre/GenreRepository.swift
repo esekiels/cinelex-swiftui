@@ -8,37 +8,30 @@
 import Networking
 import Database
 import Model
+import Common
 
 public protocol GenreRepositoryProtocol: Sendable {
-    func fetchGenres() async throws -> [Genre]
+    func fetchGenres() -> AsyncStream<[Genre]>
 }
 
 public final class GenreRepository: GenreRepositoryProtocol {
-    
+
     private let service: GenreServiceProtocol
     private let dao: GenreDaoProtocol
-    
+
     public init(service: GenreServiceProtocol, dao: GenreDaoProtocol) {
         self.service = service
         self.dao = dao
     }
-    
-    public func fetchGenres() async throws -> [Genre] {
-        if let cachedItems = try? await dao.fetchGenres(), !cachedItems.isEmpty {
-            Task {
-                let genres = try await service.fetchGenres()
-                try await dao.saveGenres(genres)
-            }
-            
-            return cachedItems
-        }
-        
-        let genres = try await service.fetchGenres()
-        
-        Task {
-            try? await dao.saveGenres(genres)
-        }
-        
-        return genres
+
+    public func fetchGenres() -> AsyncStream<[Genre]> {
+        .onDataStream(
+            dao: { [dao] in
+                let items = try await dao.fetchGenres()
+                return items.isEmpty ? nil : items
+            },
+            service: { [service] in try await service.fetchGenres() },
+            then: { [dao] in try await dao.saveGenres($0) }
+        )
     }
 }

@@ -11,76 +11,62 @@ import Model
 import Common
 
 public protocol MovieRepositoryProtocol: Sendable {
-    func fetchNowPlaying() async throws -> [Movie]
-    func fetchUpcoming() async throws -> [Movie]
-    func fetchPopular() async throws -> [Movie]
-    func fetchTopRated() async throws -> [Movie]
-    func fetchMoveDetails(_ movieId: Int) async throws -> MovieDetails
+    func fetchNowPlaying() -> AsyncStream<[Movie]>
+    func fetchUpcoming() -> AsyncStream<[Movie]>
+    func fetchPopular() -> AsyncStream<[Movie]>
+    func fetchTopRated() -> AsyncStream<[Movie]>
+    func fetchMovieDetails(_ movieId: Int) -> AsyncStream<MovieDetails>
     func searchMovies(query: String, page: Int) async throws -> PageResult<Movie>
 }
 
 public final class MovieRepository: MovieRepositoryProtocol {
-    
+
     private let service: MovieServiceProtocol
     private let dao: MovieDaoProtocol
-    
+
     public init(service: MovieServiceProtocol, dao: MovieDaoProtocol) {
         self.service = service
         self.dao = dao
     }
-    
-    public func fetchNowPlaying() async throws -> [Movie] {
-        try await fetchMovies(category: "nowPlaying", remoteFetch: service.fetchNowPlaying)
+
+    public func fetchNowPlaying() -> AsyncStream<[Movie]> {
+        fetchMovies(category: "nowPlaying", remoteFetch: service.fetchNowPlaying)
     }
-    
-    public func fetchPopular() async throws -> [Movie] {
-        try await fetchMovies(category: "popular", remoteFetch: service.fetchPopular)
+
+    public func fetchPopular() -> AsyncStream<[Movie]> {
+        fetchMovies(category: "popular", remoteFetch: service.fetchPopular)
     }
-    
-    public func fetchUpcoming() async throws -> [Movie] {
-        try await fetchMovies(category: "upcoming", remoteFetch: service.fetchUpcoming)
+
+    public func fetchUpcoming() -> AsyncStream<[Movie]> {
+        fetchMovies(category: "upcoming", remoteFetch: service.fetchUpcoming)
     }
-    
-    public func fetchTopRated() async throws -> [Movie] {
-        try await fetchMovies(category: "topRated", remoteFetch: service.fetchTopRated)
+
+    public func fetchTopRated() -> AsyncStream<[Movie]> {
+        fetchMovies(category: "topRated", remoteFetch: service.fetchTopRated)
     }
-    
-    public func fetchMoveDetails(_ movieId: Int) async throws -> MovieDetails {
-        do {
-            let details = try await service.fetchDetails(movieId)
-            try? await dao.saveMovieDetails(details)
-            return details
-        } catch {
-            if let cached = try? await dao.fetchMovieDetails(movieId) {
-                return cached
-            }
-            throw error
-        }
+
+    public func fetchMovieDetails(_ movieId: Int) -> AsyncStream<MovieDetails> {
+        .onDataStream(
+            dao: { [dao] in try await dao.fetchMovieDetails(movieId) },
+            service: { [service] in try await service.fetchDetails(movieId) },
+            then: { [dao] in try await dao.saveMovieDetails($0) }
+        )
     }
-    
+
     private func fetchMovies(
         category: String,
         remoteFetch: @Sendable @escaping () async throws -> [Movie]
-    ) async throws -> [Movie] {
-        if let cachedItems = try? await dao.fetchMoviesByCategory(category),
-           !cachedItems.isEmpty {
-            Task {
-                let movies = try await remoteFetch()
-                try await dao.saveMoviesByCategory(movies, category: category)
-            }
-            
-            return cachedItems
-        }
-        
-        let movies = try await remoteFetch()
-        
-        Task {
-            try? await dao.saveMoviesByCategory(movies, category: category)
-        }
-        
-        return movies
+    ) -> AsyncStream<[Movie]> {
+        .onDataStream(
+            dao: { [dao] in
+                let items = try await dao.fetchMoviesByCategory(category)
+                return items.isEmpty ? nil : items
+            },
+            service: remoteFetch,
+            then: { [dao] in try await dao.saveMoviesByCategory($0, category: category) }
+        )
     }
-    
+
     public func searchMovies(query: String, page: Int) async throws -> PageResult<Movie> {
         let response = try await service.searchMovies(query, page: page)
         return PageResult(page: response.page, totalPages: response.totalPages, results: response.results)

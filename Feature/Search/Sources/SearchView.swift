@@ -45,7 +45,7 @@ public struct SearchView: View {
                 prompt: Text(LocalizeConstant.searchPrompt)
             )
             .task {
-                viewModel.loadRecommendations()
+                viewModel.load()
             }
             .navigationDestination(for: Int.self) { movieId in
                 factory?.makeDetailsView(movieId)

@@ -8,10 +8,10 @@
 import Model
 
 public final class FakeGenreRepository: GenreRepositoryProtocol {
-    
+
     public init() {}
-    
-    public func fetchGenres() async throws -> [Genre] {
-        Genre.stubs
+
+    public func fetchGenres() -> AsyncStream<[Genre]> {
+        .just(Genre.stubs)
     }
 }

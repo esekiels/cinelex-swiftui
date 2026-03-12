@@ -21,7 +21,7 @@ public extension AsyncStream where Element: Sendable {
                 if let cached = try? await dao() {
                     continuation.yield(cached)
                 }
-                
+
                 if let fresh = try? await service() {
                     try? await then(fresh)
                     continuation.yield(fresh)

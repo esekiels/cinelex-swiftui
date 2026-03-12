@@ -36,18 +36,9 @@ public class SearchViewModel: BaseViewModel {
         self.genreRepository = genreRepository
     }
 
-    func loadRecommendations() {
-        guard recommendations.isEmpty else {
-            return
-        }
-
-        Task {
-            do {
-                recommendations = try await movieRepository.fetchPopular()
-            } catch {
-                // no-op
-            }
-        }
+    func load() {
+        Task { for await items in movieRepository.fetchPopular() { recommendations = items } }
+        Task { for await items in genreRepository.fetchGenres() { genres = items } }
     }
 
     func loadMoreIfNeeded(current movie: Movie) {
@@ -94,7 +85,6 @@ public class SearchViewModel: BaseViewModel {
         totalPages = 1
 
         do {
-            try await loadGenresIfNeeded()
             let response = try await movieRepository.searchMovies(query: query, page: 1)
             movies = mapGenres(response.results)
             currentPage = response.page
@@ -107,13 +97,6 @@ public class SearchViewModel: BaseViewModel {
             let cinelexError = handleError(error)
             state = .error(cinelexError)
         }
-    }
-
-    private func loadGenresIfNeeded() async throws {
-        guard genres.isEmpty else {
-            return
-        }
-        genres = try await genreRepository.fetchGenres()
     }
 
     private func mapGenres(_ movies: [Movie]) -> [Movie] {

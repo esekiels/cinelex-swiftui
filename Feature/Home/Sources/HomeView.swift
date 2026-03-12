@@ -87,7 +87,7 @@ public struct HomeView: View {
                 }
             }
             .refreshable {
-                viewModel.fetchMovies(forceRefresh: true)
+                viewModel.fetchMovies()
             }
             .navigationDestination(for: Movie.self) { movie in
                 if let factory {

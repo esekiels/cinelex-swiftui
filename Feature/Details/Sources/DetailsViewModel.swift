@@ -26,16 +26,12 @@ public class DetailsViewModel: BaseViewModel {
     
     func fetchDetails() {
         state = .loading
-        
+
         Task {
-            do {
-                let data = try await repository.fetchMoveDetails(movieId)
+            for await data in repository.fetchMovieDetails(movieId) {
                 title = data.title
                 movie = data
                 state = .idle
-            } catch {
-                let cinelexError = handleError(error)
-                state = .error(cinelexError)
             }
         }
     }
