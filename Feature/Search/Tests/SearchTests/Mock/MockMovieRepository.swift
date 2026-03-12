@@ -1,7 +1,15 @@
+//
+//  MockMovieRepository.swift
+//  Search
+//
+//  Created by Esekiel Surbakti on 12/03/26.
+//
+
 import Data
 import Model
+import Foundation
 
-final actor MockMovieRepository: MovieRepositoryProtocol {
+final class MockMovieRepository: MovieRepositoryProtocol, @unchecked Sendable {
 
     private var mockMovies: [Movie] = []
     private var mockDetails: MovieDetails = MovieDetails.stub
@@ -17,29 +25,24 @@ final actor MockMovieRepository: MovieRepositoryProtocol {
         shouldThrowError = value
     }
 
-    func fetchNowPlaying() async throws -> [Movie] {
-        if shouldThrowError { throw NSError(domain: "", code: 0) }
-        return mockMovies
+    func fetchNowPlaying() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
     }
 
-    func fetchUpcoming() async throws -> [Movie] {
-        if shouldThrowError { throw NSError(domain: "", code: 0) }
-        return mockMovies
+    func fetchUpcoming() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
     }
 
-    func fetchPopular() async throws -> [Movie] {
-        if shouldThrowError { throw NSError(domain: "", code: 0) }
-        return mockMovies
+    func fetchPopular() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
     }
 
-    func fetchTopRated() async throws -> [Movie] {
-        if shouldThrowError { throw NSError(domain: "", code: 0) }
-        return mockMovies
+    func fetchTopRated() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
     }
 
-    func fetchMoveDetails(_ movieId: Int) async throws -> MovieDetails {
-        if shouldThrowError { throw NSError(domain: "", code: 0) }
-        return mockDetails
+    func fetchMovieDetails(_ movieId: Int) -> AsyncStream<MovieDetails> {
+        .just(mockDetails)
     }
 
     func searchMovies(query: String, page: Int) async throws -> PageResult<Movie> {

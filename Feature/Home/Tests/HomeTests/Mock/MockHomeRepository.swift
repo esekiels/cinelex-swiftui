@@ -1,46 +1,36 @@
-//
-//  MockHomeRepository.swift
-//  Home
-//
-//  Created by Esekiel Surbakti on 11/02/26.
-//
-
 import Model
 import Data
-import Common
 
-final actor MockHomeRepository: HomeRepositoryProtocol {
-    
+final class MockHomeRepository: MovieRepositoryProtocol, @unchecked Sendable {
+
     private var mockMovies: [Movie] = []
-    private var shouldThrowError = false
-    
+    private var mockDetails: MovieDetails = MovieDetails.stub
+
     func setMockMovies(_ movies: [Movie]) {
         mockMovies = movies
     }
-    
-    func setShouldThrowError(_ value: Bool) {
-        shouldThrowError = value
+
+    func fetchNowPlaying() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
     }
-    
-    func fetchNowPlaying() async throws -> [Movie] {
-        if shouldThrowError { throw NSError(domain: "test", code: -1) }
-        return mockMovies
+
+    func fetchPopular() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
     }
-    
-    func fetchPopular() async throws -> [Movie] {
-        if shouldThrowError { throw NSError(domain: "test", code: -1) }
-        return mockMovies
+
+    func fetchTopRated() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
     }
-    
-    func fetchTopRated() async throws -> [Movie] {
-        if shouldThrowError { throw NSError(domain: "test", code: -1) }
-        return mockMovies
+
+    func fetchUpcoming() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
     }
-    
-    func fetchUpcoming() async throws -> [Movie] {
-        if shouldThrowError { throw NSError(domain: "test", code: -1) }
-        return mockMovies
+
+    func fetchMovieDetails(_ movieId: Int) -> AsyncStream<MovieDetails> {
+        .just(mockDetails)
     }
-    
-    func fetchGenres() async {}
+
+    func searchMovies(query: String, page: Int) async throws -> PageResult<Movie> {
+        PageResult(page: page, totalPages: 1, results: mockMovies)
+    }
 }

@@ -1,21 +1,22 @@
+//
+//  MockGenreRepository.swift
+//  Search
+//
+//  Created by Esekiel Surbakti on 12/03/26.
+//
+
 import Data
 import Model
 
-final actor MockGenreRepository: GenreRepositoryProtocol {
+final class MockGenreRepository: GenreRepositoryProtocol, @unchecked Sendable {
 
     private var mockGenres: [Genre] = []
-    var shouldThrowError = false
 
     func setMockGenres(_ genres: [Genre]) {
         mockGenres = genres
     }
 
-    func setShouldThrowError(_ value: Bool) {
-        shouldThrowError = value
-    }
-
-    func fetchGenres() async throws -> [Genre] {
-        if shouldThrowError { throw NSError(domain: "", code: 0) }
-        return mockGenres
+    func fetchGenres() -> AsyncStream<[Genre]> {
+        .just(mockGenres)
     }
 }

@@ -2,30 +2,31 @@
 //  MockGenreDao.swift
 //  Data
 //
-//  Created by Esekiel Surbakti on 14/02/26.
+//  Created by Esekiel Surbakti on 12/03/26.
 //
 
-import Model
 import Database
+import Model
 
 final actor MockGenreDao: GenreDaoProtocol {
 
-    private var storage: [Genre] = []
-    
+    private var genres: [Genre] = []
     private(set) var saveCalled = false
-    private(set) var deleteCalled = false
 
-    func fetch() async throws -> [Genre] {
-        storage
+    func seedGenres(_ genres: [Genre]) {
+        self.genres = genres
     }
 
-    func save(_ data: [Genre]) async throws {
+    func fetchGenres() async throws -> [Genre] {
+        genres
+    }
+
+    func saveGenres(_ data: [Genre]) async throws {
         saveCalled = true
-        storage = data
+        genres = data
     }
 
-    func deleteAll() async throws {
-        deleteCalled = true
-        storage.removeAll()
+    func clearAll() async throws {
+        genres.removeAll()
     }
 }

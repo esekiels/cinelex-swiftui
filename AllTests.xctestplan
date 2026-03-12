@@ -35,9 +35,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Core\/Network",
-        "identifier" : "NetworkTests",
-        "name" : "NetworkTests"
+        "containerPath" : "container:Core\/Networking",
+        "identifier" : "NetworkingTests",
+        "name" : "NetworkingTests"
       }
     },
     {
