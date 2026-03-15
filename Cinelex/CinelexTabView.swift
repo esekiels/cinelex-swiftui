@@ -10,6 +10,7 @@ import Datastore
 import Home
 import Search
 import Common
+import Design
 
 struct CinelexTabView: View {
 
@@ -30,6 +31,7 @@ struct CinelexTabView: View {
                     Label(LocalizeConstant.search, systemImage: "magnifyingglass")
                 }
         }
+        .tint(Color.colorPrimary)
         .id(preferences.locale)
     }
 }

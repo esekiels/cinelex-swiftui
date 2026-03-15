@@ -1,10 +1,3 @@
-//
-//  SearchViewModelTests.swift
-//  Search
-//
-//  Created by Esekiel Surbakti on 17/02/26.
-//
-
 import Testing
 import Model
 import Common
@@ -14,15 +7,16 @@ import Common
 @MainActor
 struct SearchViewModelTests {
 
-    private func makeSUT() -> (sut: SearchViewModel, repository: MockSearchRepository) {
-        let repository = MockSearchRepository()
-        let sut = SearchViewModel(repository: repository)
-        return (sut, repository)
+    private func makeSUT() -> (sut: SearchViewModel, movieRepo: MockMovieRepository, genreRepo: MockGenreRepository) {
+        let movieRepo = MockMovieRepository()
+        let genreRepo = MockGenreRepository()
+        let sut = SearchViewModel(movieRepository: movieRepo, genreRepository: genreRepo)
+        return (sut, movieRepo, genreRepo)
     }
 
     @Test func searchMoviesSuccess() async {
-        let (sut, repository) = makeSUT()
-        await repository.setMockMovies(Movie.stubs)
+        let (sut, movieRepo, _) = makeSUT()
+        movieRepo.setMockMovies(Movie.stubs)
 
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))
@@ -33,8 +27,8 @@ struct SearchViewModelTests {
     }
 
     @Test func searchMoviesFailure() async {
-        let (sut, repository) = makeSUT()
-        await repository.setShouldThrowError(true)
+        let (sut, movieRepo, _) = makeSUT()
+        movieRepo.setShouldThrowError(true)
 
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))
@@ -44,8 +38,8 @@ struct SearchViewModelTests {
     }
 
     @Test func clearQueryResetsState() async {
-        let (sut, repository) = makeSUT()
-        await repository.setMockMovies(Movie.stubs)
+        let (sut, movieRepo, _) = makeSUT()
+        movieRepo.setMockMovies(Movie.stubs)
 
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))
@@ -55,19 +49,19 @@ struct SearchViewModelTests {
         #expect(sut.movies.isEmpty)
     }
 
-    @Test func loadRecommendationsSuccess() async {
-        let (sut, repository) = makeSUT()
-        await repository.setMockMovies(Movie.stubs)
+    @Test func loadSuccess() async {
+        let (sut, movieRepo, _) = makeSUT()
+        movieRepo.setMockMovies(Movie.stubs)
 
-        sut.loadRecommendations()
+        sut.load()
         try? await Task.sleep(for: .milliseconds(100))
 
         #expect(sut.recommendations.count == Movie.stubs.count)
     }
 
     @Test func loadMoreSuccess() async throws {
-        let (sut, repository) = makeSUT()
-        await repository.setMockMovies(Movie.stubs, totalPages: 3)
+        let (sut, movieRepo, _) = makeSUT()
+        movieRepo.setMockMovies(Movie.stubs, totalPages: 3)
 
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))

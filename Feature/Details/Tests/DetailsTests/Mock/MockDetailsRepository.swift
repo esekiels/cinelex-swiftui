@@ -1,30 +1,36 @@
-//
-//  MockDetailsRepository.swift
-//  Details
-//
-//  Created by Esekiel Surbakti on 12/02/26.
-//
-
 import Model
 import Data
-import Foundation
 
-final actor MockDetailsRepository: DetailsRepositoryProtocol {
-    
-    private var mockDetails: MovieDetails?
-    private var shouldThrowError = false
-    
+final class MockDetailsRepository: MovieRepositoryProtocol, @unchecked Sendable {
+
+    private var mockMovies: [Movie] = []
+    private var mockDetails: MovieDetails = MovieDetails.stub
+
     func setMockDetails(_ details: MovieDetails) {
         mockDetails = details
     }
-    
-    func setShouldThrowError(_ value: Bool) {
-        shouldThrowError = value
+
+    func fetchNowPlaying() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
     }
-    
-    func fetchDetails(_ id: Int) async throws -> MovieDetails {
-        if shouldThrowError { throw NSError(domain: "test", code: -1) }
-        guard let mockDetails else { throw NSError(domain: "No mock", code: 0) }
-        return mockDetails
+
+    func fetchPopular() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
+    }
+
+    func fetchTopRated() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
+    }
+
+    func fetchUpcoming() -> AsyncStream<[Movie]> {
+        .just(mockMovies)
+    }
+
+    func fetchMovieDetails(_ movieId: Int) -> AsyncStream<MovieDetails> {
+        .just(mockDetails)
+    }
+
+    func searchMovies(query: String, page: Int) async throws -> PageResult<Movie> {
+        PageResult(page: page, totalPages: 1, results: mockMovies)
     }
 }

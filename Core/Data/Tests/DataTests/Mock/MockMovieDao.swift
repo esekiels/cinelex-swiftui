@@ -2,43 +2,46 @@
 //  MockMovieDao.swift
 //  Data
 //
-//  Created by Esekiel Surbakti on 11/02/26.
+//  Created by Esekiel Surbakti on 12/03/26.
 //
 
-import Model
 import Database
+import Model
 
 final actor MockMovieDao: MovieDaoProtocol {
-    
-    private var storage: [String: [Movie]] = [:]
-    
-    private(set) var fetchCalled = false
-    private(set) var saveCalled = false
-    private(set) var deleteCalled = false
-    private(set) var lastCategory: String?
-    
-    func fetch(_ category: String) async throws -> [Movie] {
-        fetchCalled = true
-        lastCategory = category
-        return storage[category] ?? []
+
+    private var moviesByCategory: [String: [Movie]] = [:]
+    private var details: [Int: MovieDetails] = [:]
+    private(set) var saveCategoryCalled = false
+    private(set) var saveDetailsCalled = false
+
+    func seedMovies(_ movies: [Movie], category: String) {
+        moviesByCategory[category] = movies
     }
-    
-    func save(_ data: [Movie], category: String) async throws {
-        saveCalled = true
-        lastCategory = category
-        storage[category] = data
+
+    func seedDetails(_ detail: MovieDetails) {
+        details[detail.id] = detail
     }
-    
-    func delete(_ category: String) async throws {
-        deleteCalled = true
-        storage[category] = nil
+
+    func fetchMoviesByCategory(_ category: String) async throws -> [Movie] {
+        moviesByCategory[category] ?? []
     }
-    
-    func deleteAll() async throws {
-        storage.removeAll()
+
+    func saveMoviesByCategory(_ data: [Movie], category: String) async throws {
+        saveCategoryCalled = true
+        moviesByCategory[category] = data
     }
-    
-    func seedCache(_ data: [Movie], category: String) {
-        storage[category] = data
+
+    func clearAllMovies() async throws {
+        moviesByCategory.removeAll()
+    }
+
+    func fetchMovieDetails(_ movieId: Int) async throws -> MovieDetails? {
+        details[movieId]
+    }
+
+    func saveMovieDetails(_ data: MovieDetails) async throws {
+        saveDetailsCalled = true
+        details[data.id] = data
     }
 }

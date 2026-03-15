@@ -24,7 +24,7 @@ public struct HomeView: View {
     
     public var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
                     switch viewModel.state {
                     case .idle:
@@ -87,7 +87,7 @@ public struct HomeView: View {
                 }
             }
             .refreshable {
-                viewModel.fetchMovies(forceRefresh: true)
+                viewModel.fetchMovies()
             }
             .navigationDestination(for: Movie.self) { movie in
                 if let factory {
@@ -106,7 +106,7 @@ enum CarouselStyle {
 #Preview("Light") {
     HomeView(
         viewModel: HomeViewModel(
-            repository: FakeHomeRepository()
+            repository: FakeMovieRepository()
         )
     )
     .environment(UserPreferences())
@@ -116,7 +116,7 @@ enum CarouselStyle {
 #Preview("Dark") {
     HomeView(
         viewModel: HomeViewModel(
-            repository: FakeHomeRepository()
+            repository: FakeMovieRepository()
         )
     )
     .environment(UserPreferences())

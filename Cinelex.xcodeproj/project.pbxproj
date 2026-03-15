@@ -37,7 +37,7 @@
 		BF2396CA2F39B0390085016E /* Cinelex.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Cinelex.xcodeproj; sourceTree = "<group>"; };
 		BF2397052F39B3460085016E /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Common; path = Core/Common; sourceTree = SOURCE_ROOT; };
 		BF2397062F39B3640085016E /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Model; path = Core/Model; sourceTree = SOURCE_ROOT; };
-		BF2397072F39B3780085016E /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Core/Network; sourceTree = SOURCE_ROOT; };
+		BF2397072F39B3780085016E /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Networking; path = Core/Networking; sourceTree = SOURCE_ROOT; };
 		BF2397082F39B3890085016E /* Design */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Design; path = Core/Design; sourceTree = SOURCE_ROOT; };
 		BF2397092F39B3A80085016E /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Navigation; path = Core/Navigation; sourceTree = SOURCE_ROOT; };
 		BF23970A2F39B4400085016E /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Database; path = Core/Database; sourceTree = SOURCE_ROOT; };
@@ -146,7 +146,7 @@
 			children = (
 				BF23970B2F39B4540085016E /* Data */,
 				BF23970A2F39B4400085016E /* Database */,
-				BF2397072F39B3780085016E /* Network */,
+				BF2397072F39B3780085016E /* Networking */,
 				BFD8C2332F44180D00695A8F /* Datastore */,
 				BF2397062F39B3640085016E /* Model */,
 				BF2397092F39B3A80085016E /* Navigation */,
@@ -521,7 +521,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W3UM55KY7Y;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -537,7 +537,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = co.esekiels.cinelex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -562,7 +562,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W3UM55KY7Y;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -578,7 +578,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = co.esekiels.cinelex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

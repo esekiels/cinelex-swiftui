@@ -16,26 +16,22 @@ public class DetailsViewModel: BaseViewModel {
     private(set) var movie: MovieDetails?
     private(set) var title: String = ""
     
-    private let repository: DetailsRepositoryProtocol
+    private let repository: MovieRepositoryProtocol
     private let movieId: Int
     
-    public init(repository: DetailsRepositoryProtocol, movieId: Int) {
+    public init(repository: MovieRepositoryProtocol, movieId: Int) {
         self.repository = repository
         self.movieId = movieId
     }
     
     func fetchDetails() {
         state = .loading
-        
+
         Task {
-            do {
-                let data = try await repository.fetchDetails(movieId)
+            for await data in repository.fetchMovieDetails(movieId) {
                 title = data.title
                 movie = data
                 state = .idle
-            } catch {
-                let cinelexError = handleError(error)
-                state = .error(cinelexError)
             }
         }
     }

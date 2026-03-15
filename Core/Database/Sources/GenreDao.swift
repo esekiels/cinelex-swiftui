@@ -9,9 +9,9 @@ import Foundation
 import Model
 
 public protocol GenreDaoProtocol: Sendable {
-    func fetch() async throws -> [Genre]
-    func save(_ data: [Genre]) async throws
-    func deleteAll() async throws
+    func fetchGenres() async throws -> [Genre]
+    func saveGenres(_ data: [Genre]) async throws
+    func clearAll() async throws
 }
 
 public actor GenreDao: GenreDaoProtocol {
@@ -24,7 +24,7 @@ public actor GenreDao: GenreDaoProtocol {
         self.modelContext = ModelContext(container)
     }
 
-    public func fetch() async throws -> [Genre] {
+    public func fetchGenres() async throws -> [Genre] {
         let descriptor = FetchDescriptor<GenreEntity>(
             sortBy: [SortDescriptor(\.id)]
         )
@@ -32,7 +32,7 @@ public actor GenreDao: GenreDaoProtocol {
         return entities.toDomain()
     }
 
-    public func save(_ data: [Genre]) async throws {
+    public func saveGenres(_ data: [Genre]) async throws {
         for genre in data {
             let id = genre.id
             let descriptor = FetchDescriptor<GenreEntity>(
@@ -50,7 +50,7 @@ public actor GenreDao: GenreDaoProtocol {
         try modelContext.save()
     }
 
-    public func deleteAll() async throws {
+    public func clearAll() async throws {
         try modelContext.delete(model: GenreEntity.self)
         try modelContext.save()
     }
