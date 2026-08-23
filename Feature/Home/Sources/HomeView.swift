@@ -16,7 +16,7 @@ public struct HomeView: View {
 
     @State private var viewModel: HomeViewModel
     @Environment(UserPreferences.self) private var preferences
-    @Environment(\.homeFactory) private var factory
+    @Environment(\.detailsFactory) private var factory
 
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel

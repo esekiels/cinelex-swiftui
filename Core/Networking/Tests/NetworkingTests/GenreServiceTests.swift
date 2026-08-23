@@ -34,9 +34,9 @@ import Common
     @Test func fetchGenresFailed() async throws {
         let (sut, mock) = makeSUT()
         mock.shouldThrowError = true
-        mock.errorToThrow = CinelexApiError.unknownError(message: "Network error")
+        mock.errorToThrow = CinelexError.unknownError(message: "Network error")
         
-        await #expect(throws: CinelexApiError.self) {
+        await #expect(throws: CinelexError.self) {
             _ = try await sut.fetchGenres()
         }
     }

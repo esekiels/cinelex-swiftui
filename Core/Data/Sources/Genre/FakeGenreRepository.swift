@@ -5,13 +5,20 @@
 //  Created by Esekiel Surbakti on 12/03/26.
 //
 
+import Common
 import Model
 
-public final class FakeGenreRepository: GenreRepositoryProtocol {
+#if DEBUG
+public final class FakeGenreRepository: GenreRepositoryProtocol, @unchecked Sendable {
 
-    public init() {}
+    public var genres: [Genre]
 
-    public func fetchGenres() -> AsyncStream<[Genre]> {
-        .just(Genre.stubs)
+    public init(genres: [Genre] = Genre.stubs) {
+        self.genres = genres
+    }
+
+    public func fetchGenres() -> DataStream<[Genre]> {
+        .just(genres)
     }
 }
+#endif

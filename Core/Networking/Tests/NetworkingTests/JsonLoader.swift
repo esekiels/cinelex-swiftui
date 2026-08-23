@@ -6,13 +6,14 @@
 //
 
 import Foundation
+@testable import Networking
 
 enum JsonLoader {
     static func load<T: Decodable>(_ filename: String, as type: T.Type) -> T {
         let bundle = Bundle.module
         guard let url = bundle.url(forResource: filename, withExtension: "json"),
               let data = try? Data(contentsOf: url),
-              let decoded = try? JSONDecoder().decode(T.self, from: data) else {
+              let decoded = try? JSONDecoder.tmdb().decode(T.self, from: data) else {
             fatalError("Failed to load \(filename).json")
         }
         return decoded

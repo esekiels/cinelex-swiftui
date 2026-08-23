@@ -39,34 +39,24 @@ public struct Movie: Identifiable, Hashable, Decodable, Sendable {
     public let genreIds: [Int]?
     public var genres: [Genre]?
     
-    private let imageUrl = "https://image.tmdb.org/t/p/original"
-    
+    private static let imageUrl = "https://image.tmdb.org/t/p/original"
+
     public var posterUrl: URL? {
         guard let posterPath else {
             return nil
         }
-        return URL(string: imageUrl + posterPath)
+        return URL(string: Self.imageUrl + posterPath)
     }
-    
+
     public var backdropUrl: URL? {
         guard let backdropPath else {
             return nil
         }
-        return URL(string: imageUrl + backdropPath)
+        return URL(string: Self.imageUrl + backdropPath)
     }
-    
+
     public var rating: String {
         String(format: "%.1f", voteAverage)
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case id, title
-        case backdropPath = "backdrop_path"
-        case posterPath = "poster_path"
-        case releaseDate = "release_date"
-        case voteAverage = "vote_average"
-        case voteCount = "vote_count"
-        case genreIds = "genre_ids"
     }
 }
 

@@ -1,57 +1,57 @@
 import Testing
-import Model
 import Common
+import Data
+import Model
 @testable import Search
 
 @Suite
 @MainActor
 struct SearchViewModelTests {
 
-    private func makeSUT() -> (sut: SearchViewModel, movieRepo: MockMovieRepository, genreRepo: MockGenreRepository) {
-        let movieRepo = MockMovieRepository()
-        let genreRepo = MockGenreRepository()
-        let sut = SearchViewModel(movieRepository: movieRepo, genreRepository: genreRepo)
-        return (sut, movieRepo, genreRepo)
+    private func makeSUT() -> (sut: SearchViewModel, movieRepo: FakeMovieRepository) {
+        let movieRepo = FakeMovieRepository()
+        let sut = SearchViewModel(
+            movieRepository: movieRepo,
+            genreRepository: FakeGenreRepository()
+        )
+        return (sut, movieRepo)
     }
 
     @Test func searchMoviesSuccess() async {
-        let (sut, movieRepo, _) = makeSUT()
-        movieRepo.setMockMovies(Movie.stubs)
+        let (sut, _) = makeSUT()
 
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))
 
-        #expect(sut.state.isIdle)
+        #expect(sut.state == .idle)
         #expect(sut.movies.count == Movie.stubs.count)
         #expect(sut.movies[0].title == "The Shawshank Redemption")
     }
 
     @Test func searchMoviesFailure() async {
-        let (sut, movieRepo, _) = makeSUT()
-        movieRepo.setShouldThrowError(true)
+        let (sut, movieRepo) = makeSUT()
+        movieRepo.error = .timeout
 
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))
 
-        #expect(sut.state.isError)
+        #expect(sut.state == .error(.timeout))
         #expect(sut.movies.isEmpty)
     }
 
     @Test func clearQueryResetsState() async {
-        let (sut, movieRepo, _) = makeSUT()
-        movieRepo.setMockMovies(Movie.stubs)
+        let (sut, _) = makeSUT()
 
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))
         sut.query = ""
 
-        #expect(sut.state.isIdle)
+        #expect(sut.state == .idle)
         #expect(sut.movies.isEmpty)
     }
 
     @Test func loadSuccess() async {
-        let (sut, movieRepo, _) = makeSUT()
-        movieRepo.setMockMovies(Movie.stubs)
+        let (sut, _) = makeSUT()
 
         sut.load()
         try? await Task.sleep(for: .milliseconds(100))
@@ -60,8 +60,8 @@ struct SearchViewModelTests {
     }
 
     @Test func loadMoreSuccess() async throws {
-        let (sut, movieRepo, _) = makeSUT()
-        movieRepo.setMockMovies(Movie.stubs, totalPages: 3)
+        let (sut, movieRepo) = makeSUT()
+        movieRepo.totalPages = 3
 
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))

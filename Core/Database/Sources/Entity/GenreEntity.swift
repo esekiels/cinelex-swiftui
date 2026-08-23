@@ -24,18 +24,8 @@ extension GenreEntity {
     func toDomain() -> Genre {
         Genre(id: id, name: name)
     }
-    
-    convenience init(_ id: Int, name: String) {
-        self.init(id: id, name: name)
-    }
 }
 
 extension Array where Element == GenreEntity {
     func toDomain() -> [Genre] { map { $0.toDomain() } }
-}
-
-extension Array where Element == Genre {
-    func toEntities() -> [GenreEntity] {
-        map { GenreEntity(id: $0.id, name: $0.name) }
-    }
 }

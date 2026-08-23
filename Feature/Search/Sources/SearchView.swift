@@ -15,7 +15,7 @@ import Data
 public struct SearchView: View {
 
     @State private var viewModel: SearchViewModel
-    @Environment(\.searchFactory) private var factory
+    @Environment(\.detailsFactory) private var factory
 
     public init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
@@ -165,7 +165,7 @@ public struct SearchView: View {
                 .foregroundStyle(.textPrimary)
 
             HStack(spacing: 8) {
-                Text(Date.from(movie.releaseDate)?.toYearString() ?? "n/a")
+                Text(movie.releaseDate.isEmpty ? "n/a" : String(movie.releaseDate.prefix(4)))
                     .font(.subheadline)
                     .foregroundStyle(.textSecondary)
 

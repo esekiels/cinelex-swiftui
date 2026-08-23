@@ -10,7 +10,8 @@ import Model
 import Data
 
 @Observable
-public class SearchViewModel: BaseViewModel {
+@MainActor
+public class SearchViewModel {
 
     var query: String = "" {
         didSet {
@@ -37,8 +38,16 @@ public class SearchViewModel: BaseViewModel {
     }
 
     func load() {
-        Task { for await items in movieRepository.fetchPopular() { recommendations = items } }
-        Task { for await items in genreRepository.fetchGenres() { genres = items } }
+        Task {
+            for await result in movieRepository.fetchPopular() {
+                if case .success(let items) = result { recommendations = items }
+            }
+        }
+        Task {
+            for await result in genreRepository.fetchGenres() {
+                if case .success(let items) = result { genres = items }
+            }
+        }
     }
 
     func loadMoreIfNeeded(current movie: Movie) {
@@ -54,8 +63,7 @@ public class SearchViewModel: BaseViewModel {
                 currentPage = response.page
                 totalPages = response.totalPages
             } catch {
-                let cinelexError = handleError(error)
-                state = .error(cinelexError)
+                state = .error(error.toCinelexError())
             }
             isLoadingMore = false
         }
@@ -94,8 +102,7 @@ public class SearchViewModel: BaseViewModel {
             guard !Task.isCancelled else {
                 return
             }
-            let cinelexError = handleError(error)
-            state = .error(cinelexError)
+            state = .error(error.toCinelexError())
         }
     }
 

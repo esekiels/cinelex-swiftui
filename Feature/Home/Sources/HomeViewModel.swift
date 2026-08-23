@@ -10,7 +10,8 @@ import Common
 import Model
 
 @Observable
-public class HomeViewModel: BaseViewModel {
+@MainActor
+public class HomeViewModel {
 
     private(set) var state: UiState = .loading
 
@@ -24,14 +25,38 @@ public class HomeViewModel: BaseViewModel {
     public init(repository: MovieRepositoryProtocol) {
         self.repository = repository
     }
-    
+
     func fetchMovies() {
         state = .loading
 
-        Task { for await items in repository.fetchNowPlaying() { nowPlaying = items } }
-        Task { for await items in repository.fetchPopular() { popular = items } }
-        Task { for await items in repository.fetchUpcoming() { upcoming = items } }
-        Task { for await items in repository.fetchTopRated() { topRated = items } }
-        state = .idle
+        consume(repository.fetchNowPlaying()) { self.nowPlaying = $0 }
+        consume(repository.fetchPopular()) { self.popular = $0 }
+        consume(repository.fetchUpcoming()) { self.upcoming = $0 }
+        consume(repository.fetchTopRated()) { self.topRated = $0 }
+    }
+
+    private var hasCarousels: Bool {
+        !nowPlaying.isEmpty || !popular.isEmpty || !upcoming.isEmpty || !topRated.isEmpty
+    }
+
+    private func consume(
+        _ stream: DataStream<[Movie]>,
+        assign: @escaping ([Movie]) -> Void
+    ) {
+        Task {
+            for await result in stream {
+                switch result {
+                case .success(let items):
+                    assign(items)
+                    state = .idle
+                case .failure(let error):
+                    if hasCarousels {
+                        state = .idle
+                    } else {
+                        state = .error(error)
+                    }
+                }
+            }
+        }
     }
 }

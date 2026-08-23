@@ -39,7 +39,6 @@
 		BF2397062F39B3640085016E /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Model; path = Core/Model; sourceTree = SOURCE_ROOT; };
 		BF2397072F39B3780085016E /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Networking; path = Core/Networking; sourceTree = SOURCE_ROOT; };
 		BF2397082F39B3890085016E /* Design */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Design; path = Core/Design; sourceTree = SOURCE_ROOT; };
-		BF2397092F39B3A80085016E /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Navigation; path = Core/Navigation; sourceTree = SOURCE_ROOT; };
 		BF23970A2F39B4400085016E /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Database; path = Core/Database; sourceTree = SOURCE_ROOT; };
 		BF23970B2F39B4540085016E /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = Core/Data; sourceTree = SOURCE_ROOT; };
 		BF5826AC2F3A23350035D267 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Home; path = Feature/Home; sourceTree = SOURCE_ROOT; };
@@ -149,7 +148,6 @@
 				BF2397072F39B3780085016E /* Networking */,
 				BFD8C2332F44180D00695A8F /* Datastore */,
 				BF2397062F39B3640085016E /* Model */,
-				BF2397092F39B3A80085016E /* Navigation */,
 				BF2397082F39B3890085016E /* Design */,
 				BF2397052F39B3460085016E /* Common */,
 			);
@@ -520,6 +518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W3UM55KY7Y;
@@ -538,8 +537,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = co.esekiels.cinelex;
+				PRODUCT_BUNDLE_IDENTIFIER = co.esekiels.cinelexapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -561,6 +561,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W3UM55KY7Y;
@@ -579,8 +580,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = co.esekiels.cinelex;
+				PRODUCT_BUNDLE_IDENTIFIER = co.esekiels.cinelexapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

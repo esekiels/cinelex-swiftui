@@ -34,12 +34,12 @@ final class MockApiManager: ApiManager, @unchecked Sendable {
         lastURL = url
         
         if shouldThrowError {
-            throw errorToThrow ?? CinelexApiError.unknownError(message: "Mock error")
+            throw errorToThrow ?? CinelexError.unknownError(message: "Mock error")
         }
         
         guard let mockResponse = getMockResponse(for: url),
               let response = mockResponse as? T else {
-            throw CinelexApiError.decodingError(NSError(domain: "MockError", code: 0))
+            throw CinelexError.decodingError("Mock decoding error")
         }
         
         return response

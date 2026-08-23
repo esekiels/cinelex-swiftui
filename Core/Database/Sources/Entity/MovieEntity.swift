@@ -50,9 +50,3 @@ extension MovieEntity {
 extension Array where Element == MovieEntity {
     func toDomain() -> [Movie] { map { $0.toDomain() } }
 }
-
-extension Array where Element == Movie {
-    func toEntities(category: String) -> [MovieEntity] {
-        map { MovieEntity($0, category: category) }
-    }
-}
