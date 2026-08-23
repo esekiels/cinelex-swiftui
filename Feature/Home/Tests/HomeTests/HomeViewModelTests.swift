@@ -20,12 +20,12 @@ struct HomeViewModelTests {
         sut.fetchMovies()
         try? await Task.sleep(for: .milliseconds(100))
 
-        #expect(sut.state == .idle)
-        #expect(sut.nowPlaying.count == Movie.stubs.count)
-        #expect(sut.popular.count == Movie.stubs.count)
-        #expect(sut.topRated.count == Movie.stubs.count)
-        #expect(sut.upcoming.count == Movie.stubs.count)
-        #expect(sut.nowPlaying[0].title == "The Shawshank Redemption")
+        #expect(sut.state.uiState == .idle)
+        #expect(sut.state.nowPlaying.count == Movie.stubs.count)
+        #expect(sut.state.popular.count == Movie.stubs.count)
+        #expect(sut.state.topRated.count == Movie.stubs.count)
+        #expect(sut.state.upcoming.count == Movie.stubs.count)
+        #expect(sut.state.nowPlaying[0].title == "The Shawshank Redemption")
     }
 
     @Test func cachedMoviesSurviveNetworkFailure() async {
@@ -36,9 +36,9 @@ struct HomeViewModelTests {
         sut.fetchMovies()
         try? await Task.sleep(for: .milliseconds(100))
 
-        #expect(sut.state == .idle)
-        #expect(sut.nowPlaying.count == Movie.stubs.count)
-        #expect(sut.popular.count == Movie.stubs.count)
+        #expect(sut.state.uiState == .idle)
+        #expect(sut.state.nowPlaying.count == Movie.stubs.count)
+        #expect(sut.state.popular.count == Movie.stubs.count)
     }
 
     @Test func fetchMoviesFailureSurfacesError() async {
@@ -48,7 +48,7 @@ struct HomeViewModelTests {
         sut.fetchMovies()
         try? await Task.sleep(for: .milliseconds(100))
 
-        #expect(sut.state == .error(.timeout))
-        #expect(sut.nowPlaying.isEmpty)
+        #expect(sut.state.uiState == .error(.timeout))
+        #expect(sut.state.nowPlaying.isEmpty)
     }
 }

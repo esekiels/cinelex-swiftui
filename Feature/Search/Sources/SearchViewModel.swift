@@ -19,10 +19,7 @@ public class SearchViewModel {
         }
     }
 
-    private(set) var state: UiState = .idle
-    private(set) var movies: [Movie] = []
-    private(set) var recommendations: [Movie] = []
-    private(set) var isLoadingMore: Bool = false
+    private(set) var state = SearchState()
 
     private var currentPage: Int = 1
     private var totalPages: Int = 1
@@ -40,7 +37,7 @@ public class SearchViewModel {
     func load() {
         Task {
             for await result in movieRepository.fetchPopular() {
-                if case .success(let items) = result { recommendations = items }
+                if case .success(let items) = result { state.recommendations = items }
             }
         }
         Task {
@@ -51,30 +48,33 @@ public class SearchViewModel {
     }
 
     func loadMoreIfNeeded(current movie: Movie) {
-        guard movie.id == movies.last?.id,
+        guard movie.id == state.movies.last?.id,
               currentPage < totalPages,
-              !isLoadingMore else { return }
+              !state.isLoadingMore else { return }
 
         Task {
-            isLoadingMore = true
+            state.isLoadingMore = true
             do {
                 let response = try await movieRepository.searchMovies(query: query, page: currentPage + 1)
-                movies.append(contentsOf: mapGenres(response.results))
+                state.movies.append(contentsOf: mapGenres(response.results))
                 currentPage = response.page
                 totalPages = response.totalPages
             } catch {
-                state = .error(error.toCinelexError())
+                state.uiState = .error(error.toCinelexError())
             }
-            isLoadingMore = false
+            state.isLoadingMore = false
         }
     }
+}
 
-    private func handleQueryChange() {
+private extension SearchViewModel {
+
+    func handleQueryChange() {
         searchTask?.cancel()
 
         guard !query.trimmingCharacters(in: .whitespaces).isEmpty else {
-            movies = []
-            state = .idle
+            state.movies = []
+            state.uiState = .idle
             return
         }
 
@@ -87,26 +87,26 @@ public class SearchViewModel {
         }
     }
 
-    private func search() async {
-        state = .loading
+    func search() async {
+        state.uiState = .loading
         currentPage = 1
         totalPages = 1
 
         do {
             let response = try await movieRepository.searchMovies(query: query, page: 1)
-            movies = mapGenres(response.results)
+            state.movies = mapGenres(response.results)
             currentPage = response.page
             totalPages = response.totalPages
-            state = .idle
+            state.uiState = .idle
         } catch {
             guard !Task.isCancelled else {
                 return
             }
-            state = .error(error.toCinelexError())
+            state.uiState = .error(error.toCinelexError())
         }
     }
 
-    private func mapGenres(_ movies: [Movie]) -> [Movie] {
+    func mapGenres(_ movies: [Movie]) -> [Movie] {
         movies.map { movie in
             var movie = movie
             movie.genres = genres.filter { movie.genreIds?.contains($0.id) == true }

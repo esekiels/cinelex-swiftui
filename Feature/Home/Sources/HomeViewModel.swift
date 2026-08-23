@@ -13,12 +13,7 @@ import Model
 @MainActor
 public class HomeViewModel {
 
-    private(set) var state: UiState = .loading
-
-    private(set) var nowPlaying: [Movie] = []
-    private(set) var popular: [Movie] = []
-    private(set) var upcoming: [Movie] = []
-    private(set) var topRated: [Movie] = []
+    private(set) var state = HomeState()
 
     private let repository: MovieRepositoryProtocol
 
@@ -27,19 +22,23 @@ public class HomeViewModel {
     }
 
     func fetchMovies() {
-        state = .loading
+        state.uiState = .loading
 
-        consume(repository.fetchNowPlaying()) { self.nowPlaying = $0 }
-        consume(repository.fetchPopular()) { self.popular = $0 }
-        consume(repository.fetchUpcoming()) { self.upcoming = $0 }
-        consume(repository.fetchTopRated()) { self.topRated = $0 }
+        consume(repository.fetchNowPlaying()) { self.state.nowPlaying = $0 }
+        consume(repository.fetchPopular()) { self.state.popular = $0 }
+        consume(repository.fetchUpcoming()) { self.state.upcoming = $0 }
+        consume(repository.fetchTopRated()) { self.state.topRated = $0 }
     }
+}
 
-    private var hasCarousels: Bool {
-        !nowPlaying.isEmpty || !popular.isEmpty || !upcoming.isEmpty || !topRated.isEmpty
+private extension HomeViewModel {
+    
+    var hasCarousels: Bool {
+        !state.nowPlaying.isEmpty || !state.popular.isEmpty
+            || !state.upcoming.isEmpty || !state.topRated.isEmpty
     }
-
-    private func consume(
+    
+    func consume(
         _ stream: DataStream<[Movie]>,
         assign: @escaping ([Movie]) -> Void
     ) {
@@ -48,12 +47,12 @@ public class HomeViewModel {
                 switch result {
                 case .success(let items):
                     assign(items)
-                    state = .idle
+                    state.uiState = .idle
                 case .failure(let error):
                     if hasCarousels {
-                        state = .idle
+                        state.uiState = .idle
                     } else {
-                        state = .error(error)
+                        state.uiState = .error(error)
                     }
                 }
             }

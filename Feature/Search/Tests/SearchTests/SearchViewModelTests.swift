@@ -23,9 +23,9 @@ struct SearchViewModelTests {
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))
 
-        #expect(sut.state == .idle)
-        #expect(sut.movies.count == Movie.stubs.count)
-        #expect(sut.movies[0].title == "The Shawshank Redemption")
+        #expect(sut.state.uiState == .idle)
+        #expect(sut.state.movies.count == Movie.stubs.count)
+        #expect(sut.state.movies[0].title == "The Shawshank Redemption")
     }
 
     @Test func searchMoviesFailure() async {
@@ -35,8 +35,8 @@ struct SearchViewModelTests {
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))
 
-        #expect(sut.state == .error(.timeout))
-        #expect(sut.movies.isEmpty)
+        #expect(sut.state.uiState == .error(.timeout))
+        #expect(sut.state.movies.isEmpty)
     }
 
     @Test func clearQueryResetsState() async {
@@ -46,8 +46,8 @@ struct SearchViewModelTests {
         try? await Task.sleep(for: .milliseconds(600))
         sut.query = ""
 
-        #expect(sut.state == .idle)
-        #expect(sut.movies.isEmpty)
+        #expect(sut.state.uiState == .idle)
+        #expect(sut.state.movies.isEmpty)
     }
 
     @Test func loadSuccess() async {
@@ -56,7 +56,7 @@ struct SearchViewModelTests {
         sut.load()
         try? await Task.sleep(for: .milliseconds(100))
 
-        #expect(sut.recommendations.count == Movie.stubs.count)
+        #expect(sut.state.recommendations.count == Movie.stubs.count)
     }
 
     @Test func loadMoreSuccess() async throws {
@@ -66,7 +66,7 @@ struct SearchViewModelTests {
         sut.query = "shaw"
         try? await Task.sleep(for: .milliseconds(600))
 
-        guard let lastMovie = sut.movies.last else {
+        guard let lastMovie = sut.state.movies.last else {
             Issue.record("Expected movies to be loaded")
             return
         }
@@ -74,6 +74,6 @@ struct SearchViewModelTests {
         sut.loadMoreIfNeeded(current: lastMovie)
         try? await Task.sleep(for: .milliseconds(100))
 
-        #expect(sut.movies.count == Movie.stubs.count * 2)
+        #expect(sut.state.movies.count == Movie.stubs.count * 2)
     }
 }

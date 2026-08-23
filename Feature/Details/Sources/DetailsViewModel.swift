@@ -13,9 +13,7 @@ import Model
 @MainActor
 public class DetailsViewModel {
 
-    private(set) var state: UiState = .loading
-    private(set) var movie: MovieDetails?
-    private(set) var title: String = ""
+    private(set) var state = DetailsState()
 
     private let repository: MovieRepositoryProtocol
     private let movieId: Int
@@ -26,23 +24,25 @@ public class DetailsViewModel {
     }
 
     func fetchDetails() {
-        state = .loading
+        state.uiState = .loading
 
         Task {
             for await result in repository.fetchMovieDetails(movieId) {
-                switch result {
-                case .success(let data):
-                    title = data.title
-                    movie = data
-                    state = .idle
-                case .failure(let error):
-                    if movie == nil {
-                        state = .error(error)
-                    } else {
-                        state = .idle
-                    }
-                }
+                consume(result)
             }
+        }
+    }
+}
+
+private extension DetailsViewModel {
+
+    func consume(_ result: Result<MovieDetails, CinelexError>) {
+        switch result {
+        case .success(let data):
+            state.movie = data
+            state.uiState = .idle
+        case .failure(let error):
+            state.uiState = state.movie == nil ? .error(error) : .idle
         }
     }
 }

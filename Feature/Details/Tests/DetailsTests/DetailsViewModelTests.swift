@@ -20,10 +20,10 @@ struct DetailsViewModelTests {
         sut.fetchDetails()
         try? await Task.sleep(for: .milliseconds(100))
 
-        #expect(sut.state == .idle)
-        #expect(sut.movie != nil)
-        #expect(sut.movie?.id == 278)
-        #expect(sut.movie?.title == "The Shawshank Redemption")
+        #expect(sut.state.uiState == .idle)
+        #expect(sut.state.movie != nil)
+        #expect(sut.state.movie?.id == 278)
+        #expect(sut.state.movie?.title == "The Shawshank Redemption")
     }
 
     @Test func cachedDetailsSurviveNetworkFailure() async {
@@ -34,8 +34,8 @@ struct DetailsViewModelTests {
         sut.fetchDetails()
         try? await Task.sleep(for: .milliseconds(100))
 
-        #expect(sut.state == .idle)
-        #expect(sut.movie?.id == 278)
+        #expect(sut.state.uiState == .idle)
+        #expect(sut.state.movie?.id == 278)
     }
 
     @Test func fetchDetailsFailureSurfacesError() async {
@@ -45,7 +45,7 @@ struct DetailsViewModelTests {
         sut.fetchDetails()
         try? await Task.sleep(for: .milliseconds(100))
 
-        #expect(sut.state == .error(.notFound))
-        #expect(sut.movie == nil)
+        #expect(sut.state.uiState == .error(.notFound))
+        #expect(sut.state.movie == nil)
     }
 }

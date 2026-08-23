@@ -21,31 +21,37 @@ public struct DetailsView: View {
     }
     
     public var body: some View {
-        Group {
-            switch viewModel.state {
-            case .idle:
-                if let movie = viewModel.movie {
-                    content(movie)
+        content
+            .navigationBarTitleDisplayMode(.inline)
+            .task {
+                viewModel.fetchDetails()
+            }
+            .sheet(item: $selectedTrailer) { trailer in
+                if let url = trailer.youtubeURL {
+                    SafariView(url: url)
                 }
-            default:
-                DetailsSkeletonView()
             }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .task {
-            viewModel.fetchDetails()
-        }
-        .sheet(item: $selectedTrailer) { trailer in
-            if let url = trailer.youtubeURL {
-                SafariView(url: url)
-            }
-        }
-        .toolbar(.hidden, for: .tabBar)
+            .toolbar(.hidden, for: .tabBar)
     }
-    
-    // MARK: - Content
-    
-    private func content(_ movie: MovieDetails) -> some View {
+}
+
+private extension DetailsView {
+
+    @ViewBuilder
+    var content: some View {
+        switch viewModel.state.uiState {
+        case .idle:
+            if let movie = viewModel.state.movie {
+                details(movie)
+            }
+        default:
+            DetailsSkeletonView()
+        }
+    }
+
+    // MARK: - Details
+
+    func details(_ movie: MovieDetails) -> some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 0) {
                 backdrop(movie)
@@ -64,7 +70,7 @@ public struct DetailsView: View {
     
     // MARK: - Backdrop
     
-    private func backdrop(_ movie: MovieDetails) -> some View {
+    func backdrop(_ movie: MovieDetails) -> some View {
         KFImage.url(movie.backdropURL)
             .placeholder { ImagePlaceholder(16 / 9) }
             .resizable()
@@ -77,7 +83,7 @@ public struct DetailsView: View {
     
     // MARK: - Info
     
-    private func info(_ movie: MovieDetails) -> some View {
+    func info(_ movie: MovieDetails) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(movie.title)
                 .font(.title2)
@@ -98,7 +104,7 @@ public struct DetailsView: View {
     
     // MARK: - Overview
     
-    private func overview(_ movie: MovieDetails) -> some View {
+    func overview(_ movie: MovieDetails) -> some View {
         Text(movie.overview)
             .font(.body)
             .foregroundStyle(.textPrimary)
@@ -106,7 +112,7 @@ public struct DetailsView: View {
     
     // MARK: - Rating
     
-    private func rating(_ movie: MovieDetails) -> some View {
+    func rating(_ movie: MovieDetails) -> some View {
         HStack(spacing: 4) {
             HStack(spacing: 2) {
                 ForEach(0..<10, id: \.self) { index in
@@ -125,7 +131,7 @@ public struct DetailsView: View {
     // MARK: - Cast
     
     @ViewBuilder
-    private func castSection(_ movie: MovieDetails) -> some View {
+    func castSection(_ movie: MovieDetails) -> some View {
         if let cast = movie.cast, !cast.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
                 Text(LocalizeConstant.cast)
@@ -142,7 +148,7 @@ public struct DetailsView: View {
         }
     }
 
-    private func castCard(_ member: Cast) -> some View {
+    func castCard(_ member: Cast) -> some View {
         VStack(spacing: 6) {
             KFImage.url(member.profileURL)
                 .placeholder {
@@ -175,7 +181,7 @@ public struct DetailsView: View {
     // MARK: - Crew
     
     @ViewBuilder
-    private func crewSection(_ movie: MovieDetails) -> some View {
+    func crewSection(_ movie: MovieDetails) -> some View {
         let directors = movie.directors ?? []
         let producers = movie.producers ?? []
         let writers = movie.screenwriters ?? []
@@ -193,7 +199,7 @@ public struct DetailsView: View {
     }
 
     @ViewBuilder
-    private func crewRow(_ title: String, crew: [Crew]) -> some View {
+    func crewRow(_ title: String, crew: [Crew]) -> some View {
         if !crew.isEmpty {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
@@ -210,7 +216,7 @@ public struct DetailsView: View {
     // MARK: - Trailers
     
     @ViewBuilder
-    private func trailerSection(_ movie: MovieDetails) -> some View {
+    func trailerSection(_ movie: MovieDetails) -> some View {
         if let trailers = movie.youtubeTrailers, !trailers.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
                 Text(LocalizeConstant.trailers)
@@ -223,7 +229,7 @@ public struct DetailsView: View {
         }
     }
     
-    private func trailerRow(_ trailer: Video) -> some View {
+    func trailerRow(_ trailer: Video) -> some View {
         Button {
             selectedTrailer = trailer
         } label: {
