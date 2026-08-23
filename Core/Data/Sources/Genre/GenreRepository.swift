@@ -11,27 +11,27 @@ import Model
 import Common
 
 public protocol GenreRepositoryProtocol: Sendable {
-    func fetchGenres() -> AsyncStream<[Genre]>
+    func fetchGenres() -> DataStream<[Genre]>
 }
 
 public final class GenreRepository: GenreRepositoryProtocol {
 
     private let service: GenreServiceProtocol
-    private let dao: GenreDaoProtocol
+    private let dao: any BaseDaoProtocol<[Genre]>
 
-    public init(service: GenreServiceProtocol, dao: GenreDaoProtocol) {
+    public init(service: GenreServiceProtocol, dao: any BaseDaoProtocol<[Genre]> = GenreDao()) {
         self.service = service
         self.dao = dao
     }
 
-    public func fetchGenres() -> AsyncStream<[Genre]> {
+    public func fetchGenres() -> DataStream<[Genre]> {
         .onDataStream(
             dao: { [dao] in
-                let items = try await dao.fetchGenres()
+                let items = try await dao.get()
                 return items.isEmpty ? nil : items
             },
             service: { [service] in try await service.fetchGenres() },
-            then: { [dao] in try await dao.saveGenres($0) }
+            then: { [dao] in try await dao.save($0) }
         )
     }
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 public extension Color {
     static let colorPrimary = Color("primary", bundle: .module)
-    static let colorbackground = Color("background", bundle: .module)
     static let textPrimary = Color("textPrimary", bundle: .module)
     static let textSecondary = Color("textSecondary", bundle: .module)
 }

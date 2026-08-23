@@ -6,6 +6,7 @@
 //
 
 import Testing
+import Common
 import Model
 @testable import Data
 
@@ -19,9 +20,11 @@ struct GenreRepositoryTests {
         return (sut, service, dao)
     }
 
-    private func collect<T>(_ stream: AsyncStream<T>) async -> [T] {
+    private func collect<T>(_ stream: DataStream<T>) async -> [T] {
         var values: [T] = []
-        for await value in stream { values.append(value) }
+        for await result in stream {
+            if case .success(let value) = result { values.append(value) }
+        }
         return values
     }
 
@@ -37,7 +40,7 @@ struct GenreRepositoryTests {
 
     @Test func fetchGenresFromCacheThenNetwork() async {
         let (sut, service, dao) = makeSUT()
-        await dao.seedGenres(Genre.stubs)
+        await dao.seed(Genre.stubs)
         await service.setMockGenres(Genre.stubs)
 
         let results = await collect(sut.fetchGenres())

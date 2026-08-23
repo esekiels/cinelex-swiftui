@@ -12,7 +12,6 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../../Core/Navigation"),
         .package(path: "../../Core/Design"),
         .package(path: "../../Core/Common")
     ],
@@ -20,7 +19,6 @@ let package = Package(
         .target(
             name: "Splash",
             dependencies: [
-                .product(name: "Navigation", package: "Navigation"),
                 .product(name: "Design", package: "Design"),
                 .product(name: "Common", package: "Common")
             ]

@@ -6,6 +6,7 @@
 //
 
 import Testing
+import Common
 import Model
 import Networking
 @testable import Data
@@ -16,14 +17,18 @@ struct MovieRepositoryTests {
     private func makeSUT() -> (sut: MovieRepository, service: MockMovieService, dao: MockMovieDao) {
         let service = MockMovieService()
         let dao = MockMovieDao()
-        let sut = MovieRepository(service: service, dao: dao)
+        let sut = MovieRepository(service: service, dao: { _ in dao })
         return (sut, service, dao)
     }
 
-    private func collect<T>(_ stream: AsyncStream<T>) async -> [T] {
-        var values: [T] = []
+    private func collect<T>(_ stream: DataStream<T>) async -> [Result<T, CinelexError>] {
+        var values: [Result<T, CinelexError>] = []
         for await value in stream { values.append(value) }
         return values
+    }
+
+    private func collectValues<T>(_ stream: DataStream<T>) async -> [T] {
+        await collect(stream).compactMap { try? $0.get() }
     }
 
     // MARK: - Fetch Movies
@@ -32,7 +37,7 @@ struct MovieRepositoryTests {
         let (sut, service, _) = makeSUT()
         await service.setMockMovies(Movie.stubs)
 
-        let results = await collect(sut.fetchNowPlaying())
+        let results = await collectValues(sut.fetchNowPlaying())
 
         #expect(results.count == 1)
         #expect(results[0].count == Movie.stubs.count)
@@ -40,10 +45,10 @@ struct MovieRepositoryTests {
 
     @Test func fetchMoviesFromCacheThenNetwork() async {
         let (sut, service, dao) = makeSUT()
-        await dao.seedMovies(Movie.stubs, category: "nowPlaying")
+        await dao.seed(Movie.stubs)
         await service.setMockMovies(Movie.stubs)
 
-        let results = await collect(sut.fetchNowPlaying())
+        let results = await collectValues(sut.fetchNowPlaying())
 
         #expect(results.count == 2)
         #expect(results[0].count == Movie.stubs.count)
@@ -54,9 +59,47 @@ struct MovieRepositoryTests {
         let (sut, service, dao) = makeSUT()
         await service.setMockMovies(Movie.stubs)
 
-        _ = await collect(sut.fetchPopular())
+        _ = await collectValues(sut.fetchPopular())
 
-        #expect(await dao.saveCategoryCalled == true)
+        #expect(await dao.saveCalled == true)
+    }
+
+    @Test func fetchMoviesYieldsFailureWhenServiceThrows() async {
+        let (sut, service, _) = makeSUT()
+        await service.setShouldThrowError(true)
+
+        let results = await collect(sut.fetchNowPlaying())
+
+        #expect(results.count == 1)
+        guard case .failure = results[0] else {
+            Issue.record("Expected a failure result when the service throws")
+            return
+        }
+    }
+
+    @Test func fetchMoviesYieldsCacheThenFailureWhenServiceThrows() async {
+        let (sut, service, dao) = makeSUT()
+        await dao.seed(Movie.stubs)
+        await service.setShouldThrowError(true)
+
+        let results = await collect(sut.fetchNowPlaying())
+
+        #expect(results.count == 2)
+        guard case .success = results[0], case .failure = results[1] else {
+            Issue.record("Expected the cached value first, then the network failure")
+            return
+        }
+    }
+
+    @Test func cancellingConsumerTerminatesStream() async {
+        let (sut, service, _) = makeSUT()
+        await service.setMockMovies(Movie.stubs)
+
+        let task = Task { await collectValues(sut.fetchNowPlaying()) }
+        task.cancel()
+
+        let results = await task.value
+        #expect(results.count <= 1)
     }
 
     // MARK: - Fetch Details
@@ -64,7 +107,7 @@ struct MovieRepositoryTests {
     @Test func fetchDetailsFromNetwork() async {
         let (sut, _, _) = makeSUT()
 
-        let results = await collect(sut.fetchMovieDetails(278))
+        let results = await collectValues(sut.fetchMovieDetails(278))
 
         #expect(results.count == 1)
         #expect(results[0].id == 278)
@@ -74,7 +117,7 @@ struct MovieRepositoryTests {
         let (sut, _, dao) = makeSUT()
         await dao.seedDetails(MovieDetails.stub)
 
-        let results = await collect(sut.fetchMovieDetails(278))
+        let results = await collectValues(sut.fetchMovieDetails(278))
 
         #expect(results.count == 2)
         #expect(results[0].id == 278)
@@ -84,7 +127,7 @@ struct MovieRepositoryTests {
     @Test func fetchDetailsSavesToDao() async {
         let (sut, _, dao) = makeSUT()
 
-        _ = await collect(sut.fetchMovieDetails(278))
+        _ = await collectValues(sut.fetchMovieDetails(278))
 
         #expect(await dao.saveDetailsCalled == true)
     }
@@ -93,7 +136,7 @@ struct MovieRepositoryTests {
 
     @Test func searchMoviesSuccess() async throws {
         let (sut, service, _) = makeSUT()
-        let response = MovieResponse(page: 1, results: Movie.stubs, totalPages: 2, totalResults: 10)
+        let response = MovieResponse(page: 1, results: Movie.stubs, totalPages: 2)
         await service.setMockSearchResponse(response)
 
         let result = try await sut.searchMovies(query: "shaw", page: 1)

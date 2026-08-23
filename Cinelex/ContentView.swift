@@ -6,21 +6,18 @@
 //
 
 import Design
-import Navigation
 import Splash
 import Home
 
 struct ContentView: View {
-    
-    @Environment(CinelexCoordinator.self) private var coordinator
-    @Environment(\.factory) private var factory
-    
+
+    @State private var showSplash = true
+
     var body: some View {
         Group {
-            switch coordinator.route {
-            case .splash:
-                SplashView()
-            case .home:
+            if showSplash {
+                SplashView { showSplash = false }
+            } else {
                 CinelexTabView()
             }
         }
@@ -29,12 +26,10 @@ struct ContentView: View {
 
 #Preview("Light") {
     ContentView()
-        .environment(CinelexCoordinator())
         .preferredColorScheme(.light)
 }
 
 #Preview("Dark") {
     ContentView()
-        .environment(CinelexCoordinator())
         .preferredColorScheme(.dark)
 }

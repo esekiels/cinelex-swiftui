@@ -15,7 +15,7 @@ import Data
 public struct SearchView: View {
 
     @State private var viewModel: SearchViewModel
-    @Environment(\.searchFactory) private var factory
+    @Environment(\.detailsFactory) private var factory
 
     public init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
@@ -23,39 +23,45 @@ public struct SearchView: View {
 
     public var body: some View {
         NavigationStack {
-            Group {
-                switch viewModel.state {
-                case .idle:
-                    if viewModel.query.isEmpty {
-                        recommendationList
-                    } else if viewModel.movies.isEmpty {
-                        ContentUnavailableView.search(text: viewModel.query)
-                    } else {
-                        movieList
-                    }
-                case .loading:
-                    ProgressView()
-                case .error:
-                    EmptyView()
+            content
+                .navigationTitle(LocalizeConstant.search)
+                .searchable(
+                    text: $viewModel.query,
+                    prompt: Text(LocalizeConstant.searchPrompt)
+                )
+                .task {
+                    viewModel.load()
                 }
+                .navigationDestination(for: Int.self) { movieId in
+                    factory?.makeDetailsView(movieId)
+                }
+        }
+    }
+}
+
+private extension SearchView {
+
+    @ViewBuilder
+    var content: some View {
+        switch viewModel.state.uiState {
+        case .idle:
+            if viewModel.query.isEmpty {
+                recommendationList
+            } else if viewModel.state.movies.isEmpty {
+                ContentUnavailableView.search(text: viewModel.query)
+            } else {
+                movieList
             }
-            .navigationTitle(LocalizeConstant.search)
-            .searchable(
-                text: $viewModel.query,
-                prompt: Text(LocalizeConstant.searchPrompt)
-            )
-            .task {
-                viewModel.load()
-            }
-            .navigationDestination(for: Int.self) { movieId in
-                factory?.makeDetailsView(movieId)
-            }
+        case .loading:
+            ProgressView()
+        case .error:
+            EmptyView()
         }
     }
 
     // MARK: - Recommendations
 
-    private var recommendationList: some View {
+    var recommendationList: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
                 Text(LocalizeConstant.recommendations)
@@ -64,7 +70,7 @@ public struct SearchView: View {
                     .padding(.horizontal, 16)
                     .padding(.top, 16)
 
-                ForEach(viewModel.recommendations) { movie in
+                ForEach(viewModel.state.recommendations) { movie in
                     recommendationRow(movie)
                 }
             }
@@ -72,7 +78,7 @@ public struct SearchView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private func recommendationRow(_ movie: Movie) -> some View {
+    func recommendationRow(_ movie: Movie) -> some View {
         NavigationLink(value: movie.id) {
             HStack(alignment: .center, spacing: 12) {
                 KFImage.url(movie.backdropUrl)
@@ -107,17 +113,17 @@ public struct SearchView: View {
 
     // MARK: - Movie List
 
-    private var movieList: some View {
+    var movieList: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 12) {
-                ForEach(viewModel.movies) { movie in
+                ForEach(viewModel.state.movies) { movie in
                     movieRow(movie)
                         .onAppear {
                             viewModel.loadMoreIfNeeded(current: movie)
                         }
                 }
 
-                if viewModel.isLoadingMore {
+                if viewModel.state.isLoadingMore {
                     ProgressView()
                         .padding()
                 }
@@ -128,7 +134,7 @@ public struct SearchView: View {
 
     // MARK: - Movie Row
 
-    private func movieRow(_ movie: Movie) -> some View {
+    func movieRow(_ movie: Movie) -> some View {
         NavigationLink(value: movie.id) {
             HStack(alignment: .center, spacing: 12) {
                 posterImage(movie)
@@ -144,7 +150,7 @@ public struct SearchView: View {
         .accessibilityIdentifier("MovieRow")
     }
 
-    private func posterImage(_ movie: Movie) -> some View {
+    func posterImage(_ movie: Movie) -> some View {
         KFImage.url(movie.posterUrl)
             .placeholder { ImagePlaceholder(2 / 3) }
             .resizable()
@@ -157,7 +163,7 @@ public struct SearchView: View {
             .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
-    private func movieInfo(_ movie: Movie) -> some View {
+    func movieInfo(_ movie: Movie) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(movie.title)
                 .font(.headline)
@@ -165,7 +171,7 @@ public struct SearchView: View {
                 .foregroundStyle(.textPrimary)
 
             HStack(spacing: 8) {
-                Text(Date.from(movie.releaseDate)?.toYearString() ?? "n/a")
+                Text(movie.releaseDate.isEmpty ? "n/a" : String(movie.releaseDate.prefix(4)))
                     .font(.subheadline)
                     .foregroundStyle(.textSecondary)
 
@@ -180,7 +186,7 @@ public struct SearchView: View {
         }
     }
 
-    private func rating(_ movie: Movie) -> some View {
+    func rating(_ movie: Movie) -> some View {
         HStack(spacing: 4) {
             Image(systemName: "star.fill")
                 .font(.caption)
@@ -197,7 +203,7 @@ public struct SearchView: View {
         }
     }
 
-    private func genreTags(_ movie: Movie) -> some View {
+    func genreTags(_ movie: Movie) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 6) {
                 if let genres = movie.genres, !genres.isEmpty {
@@ -211,7 +217,7 @@ public struct SearchView: View {
         }
     }
 
-    private func genreTag(_ name: String, isPlaceholder: Bool = false) -> some View {
+    func genreTag(_ name: String, isPlaceholder: Bool = false) -> some View {
         Text(name)
             .font(.caption)
             .padding(.horizontal, 8)

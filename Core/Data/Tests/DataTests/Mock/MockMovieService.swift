@@ -13,7 +13,7 @@ final actor MockMovieService: MovieServiceProtocol {
 
     private var mockMovies: [Movie] = []
     private var mockDetails: MovieDetails = MovieDetails.stub
-    private var mockSearchResponse: MovieResponse = MovieResponse(page: 1, results: [], totalPages: 1, totalResults: 0)
+    private var mockSearchResponse: MovieResponse = MovieResponse(page: 1, results: [], totalPages: 1)
     var shouldThrowError = false
 
     func setMockMovies(_ movies: [Movie]) {

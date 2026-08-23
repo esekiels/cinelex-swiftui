@@ -10,29 +10,39 @@ import Common
 import Model
 
 @Observable
-public class DetailsViewModel: BaseViewModel {
-    
-    private(set) var state: UiState = .loading
-    private(set) var movie: MovieDetails?
-    private(set) var title: String = ""
-    
+@MainActor
+public class DetailsViewModel {
+
+    private(set) var state = DetailsState()
+
     private let repository: MovieRepositoryProtocol
     private let movieId: Int
-    
+
     public init(repository: MovieRepositoryProtocol, movieId: Int) {
         self.repository = repository
         self.movieId = movieId
     }
-    
+
     func fetchDetails() {
-        state = .loading
+        state.uiState = .loading
 
         Task {
-            for await data in repository.fetchMovieDetails(movieId) {
-                title = data.title
-                movie = data
-                state = .idle
+            for await result in repository.fetchMovieDetails(movieId) {
+                consume(result)
             }
+        }
+    }
+}
+
+private extension DetailsViewModel {
+
+    func consume(_ result: Result<MovieDetails, CinelexError>) {
+        switch result {
+        case .success(let data):
+            state.movie = data
+            state.uiState = .idle
+        case .failure(let error):
+            state.uiState = state.movie == nil ? .error(error) : .idle
         }
     }
 }

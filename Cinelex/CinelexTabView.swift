@@ -16,17 +16,14 @@ struct CinelexTabView: View {
 
     @Environment(\.factory) private var factory
     @Environment(UserPreferences.self) private var preferences
-    @State private var selectedTab = 0
 
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView {
             HomeView(viewModel: factory.injectHomeViewModel())
-                .tag(0)
                 .tabItem {
                     Label(LocalizeConstant.home, systemImage: "house.fill")
                 }
             SearchView(viewModel: factory.injectSearchViewModel())
-                .tag(0)
                 .tabItem {
                     Label(LocalizeConstant.search, systemImage: "magnifyingglass")
                 }
@@ -34,9 +31,4 @@ struct CinelexTabView: View {
         .tint(Color.colorPrimary)
         .id(preferences.locale)
     }
-}
-
-#Preview {
-    CinelexTabView()
-        .preferredColorScheme(.light)
 }

@@ -35,13 +35,4 @@ public enum AppLocale: String, CaseIterable, Sendable {
         case .id: Locale(identifier: "id")
         }
     }
-
-    public var apiLanguage: String {
-        switch self {
-        case .system:
-            Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
-        case .en: "en-US"
-        case .id: "id-ID"
-        }
-    }
 }

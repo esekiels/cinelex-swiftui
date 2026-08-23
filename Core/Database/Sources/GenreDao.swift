@@ -8,50 +8,34 @@
 import Foundation
 import Model
 
-public protocol GenreDaoProtocol: Sendable {
-    func fetchGenres() async throws -> [Genre]
-    func saveGenres(_ data: [Genre]) async throws
-    func clearAll() async throws
-}
+public actor GenreDao: BaseDaoProtocol {
 
-public actor GenreDao: GenreDaoProtocol {
-
-    private let container: ModelContainer
     private let modelContext: ModelContext
 
     public init(container: ModelContainer = DatabaseManager.shared.container) {
-        self.container = container
         self.modelContext = ModelContext(container)
     }
 
-    public func fetchGenres() async throws -> [Genre] {
+    public func get() async throws -> [Genre] {
         let descriptor = FetchDescriptor<GenreEntity>(
             sortBy: [SortDescriptor(\.id)]
         )
-        let entities = try modelContext.fetch(descriptor)
-        return entities.toDomain()
+        return try modelContext.fetch(descriptor).toDomain()
     }
 
-    public func saveGenres(_ data: [Genre]) async throws {
+    public func save(_ data: [Genre]) async throws {
         for genre in data {
             let id = genre.id
             let descriptor = FetchDescriptor<GenreEntity>(
                 predicate: #Predicate { $0.id == id }
             )
-            let existing = try modelContext.fetch(descriptor)
 
-            if let entity = existing.first {
+            if let entity = try modelContext.fetch(descriptor).first {
                 entity.name = genre.name
             } else {
-                let entity = GenreEntity(id: genre.id, name: genre.name)
-                modelContext.insert(entity)
+                modelContext.insert(GenreEntity(id: genre.id, name: genre.name))
             }
         }
-        try modelContext.save()
-    }
-
-    public func clearAll() async throws {
-        try modelContext.delete(model: GenreEntity.self)
         try modelContext.save()
     }
 }

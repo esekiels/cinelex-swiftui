@@ -5,30 +5,40 @@
 //  Created by Esekiel Surbakti on 12/03/26.
 //
 
-public extension AsyncStream where Element: Sendable {
-    
-    static func just(_ value: Element) -> AsyncStream {
-        AsyncStream { $0.yield(value); $0.finish() }
-    }
-    
-    static func onDataStream(
-        dao: @Sendable @escaping () async throws -> Element?,
-        service: @Sendable @escaping () async throws -> Element,
-        then: @Sendable @escaping (Element) async throws -> Void
-    ) -> AsyncStream {
+public typealias DataStream<T> = AsyncStream<Result<T, CinelexError>>
+
+public extension AsyncStream {
+
+    static func just<Value: Sendable>(_ value: Value) -> AsyncStream
+    where Element == Result<Value, CinelexError> {
         AsyncStream { continuation in
-            Task {
+            continuation.yield(.success(value))
+            continuation.finish()
+        }
+    }
+
+    static func onDataStream<Value: Sendable>(
+        dao: @Sendable @escaping () async throws -> Value?,
+        service: @Sendable @escaping () async throws -> Value,
+        then: @Sendable @escaping (Value) async throws -> Void
+    ) -> AsyncStream where Element == Result<Value, CinelexError> {
+        AsyncStream { continuation in
+            let task = Task {
                 if let cached = try? await dao() {
-                    continuation.yield(cached)
+                    continuation.yield(.success(cached))
                 }
 
-                if let fresh = try? await service() {
+                do {
+                    let fresh = try await service()
                     try? await then(fresh)
-                    continuation.yield(fresh)
+                    continuation.yield(.success(fresh))
+                } catch {
+                    continuation.yield(.failure(error.toCinelexError()))
                 }
-                
+
                 continuation.finish()
             }
+            continuation.onTermination = { _ in task.cancel() }
         }
     }
 }

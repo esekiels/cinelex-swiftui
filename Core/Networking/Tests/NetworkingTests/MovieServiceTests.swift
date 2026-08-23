@@ -58,9 +58,9 @@ import Common
     ) async {
         let (sut, mock) = makeSUT()
         mock.shouldThrowError = true
-        mock.errorToThrow = CinelexApiError.unknownError(message: "Network error")
+        mock.errorToThrow = CinelexError.unknownError(message: "Network error")
         
-        await #expect(throws: CinelexApiError.self) {
+        await #expect(throws: CinelexError.self) {
             _ = try await method(sut)
         }
     }
@@ -86,9 +86,9 @@ import Common
     @Test func fetchDetailsFailure() async {
         let (sut, mock) = makeSUT()
         mock.shouldThrowError = true
-        mock.errorToThrow = CinelexApiError.unknownError(message: "Network error")
+        mock.errorToThrow = CinelexError.unknownError(message: "Network error")
         
-        await #expect(throws: CinelexApiError.self) {
+        await #expect(throws: CinelexError.self) {
             _ = try await sut.fetchDetails(278)
         }
     }
@@ -115,9 +115,9 @@ import Common
     @Test func searchMoviesFailure() async {
         let (sut, mock) = makeSUT()
         mock.shouldThrowError = true
-        mock.errorToThrow = CinelexApiError.unknownError(message: "Network error")
+        mock.errorToThrow = CinelexError.unknownError(message: "Network error")
 
-        await #expect(throws: CinelexApiError.self) {
+        await #expect(throws: CinelexError.self) {
             _ = try await sut.searchMovies("shaw", page: 1)
         }
     }

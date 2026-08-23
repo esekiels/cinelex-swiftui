@@ -8,9 +8,9 @@
 import Model
 
 public struct GenreResponse: Decodable, Sendable {
-    
+
     public let results: [Genre]
-    
+
     enum CodingKeys: String, CodingKey {
         case results = "genres"
     }

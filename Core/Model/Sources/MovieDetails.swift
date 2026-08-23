@@ -105,14 +105,6 @@ public struct MovieDetails: Decodable, Sendable {
     public var youtubeTrailers: [Video]? {
         videos?.results.filter { $0.site == "YouTube" && $0.type == "Trailer" }
     }
-    
-    private enum CodingKeys: String, CodingKey {
-        case id, title, overview, runtime, genres, credits, videos
-        case backdropPath = "backdrop_path"
-        case posterPath = "poster_path"
-        case voteAverage = "vote_average"
-        case releaseDate = "release_date"
-    }
 }
 
 public struct Credits: Codable, Sendable {
@@ -143,11 +135,6 @@ public struct Cast: Identifiable, Codable, Sendable {
         self.name = name
         self.character = character
         self.profilePath = profilePath
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case id, name, character
-        case profilePath = "profile_path"
     }
 }
 

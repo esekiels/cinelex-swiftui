@@ -10,7 +10,8 @@ import Model
 import Data
 
 @Observable
-public class SearchViewModel: BaseViewModel {
+@MainActor
+public class SearchViewModel {
 
     var query: String = "" {
         didSet {
@@ -18,10 +19,7 @@ public class SearchViewModel: BaseViewModel {
         }
     }
 
-    private(set) var state: UiState = .idle
-    private(set) var movies: [Movie] = []
-    private(set) var recommendations: [Movie] = []
-    private(set) var isLoadingMore: Bool = false
+    private(set) var state = SearchState()
 
     private var currentPage: Int = 1
     private var totalPages: Int = 1
@@ -37,36 +35,46 @@ public class SearchViewModel: BaseViewModel {
     }
 
     func load() {
-        Task { for await items in movieRepository.fetchPopular() { recommendations = items } }
-        Task { for await items in genreRepository.fetchGenres() { genres = items } }
-    }
-
-    func loadMoreIfNeeded(current movie: Movie) {
-        guard movie.id == movies.last?.id,
-              currentPage < totalPages,
-              !isLoadingMore else { return }
-
         Task {
-            isLoadingMore = true
-            do {
-                let response = try await movieRepository.searchMovies(query: query, page: currentPage + 1)
-                movies.append(contentsOf: mapGenres(response.results))
-                currentPage = response.page
-                totalPages = response.totalPages
-            } catch {
-                let cinelexError = handleError(error)
-                state = .error(cinelexError)
+            for await result in movieRepository.fetchPopular() {
+                if case .success(let items) = result { state.recommendations = items }
             }
-            isLoadingMore = false
+        }
+        Task {
+            for await result in genreRepository.fetchGenres() {
+                if case .success(let items) = result { genres = items }
+            }
         }
     }
 
-    private func handleQueryChange() {
+    func loadMoreIfNeeded(current movie: Movie) {
+        guard movie.id == state.movies.last?.id,
+              currentPage < totalPages,
+              !state.isLoadingMore else { return }
+
+        Task {
+            state.isLoadingMore = true
+            do {
+                let response = try await movieRepository.searchMovies(query: query, page: currentPage + 1)
+                state.movies.append(contentsOf: mapGenres(response.results))
+                currentPage = response.page
+                totalPages = response.totalPages
+            } catch {
+                state.uiState = .error(error.toCinelexError())
+            }
+            state.isLoadingMore = false
+        }
+    }
+}
+
+private extension SearchViewModel {
+
+    func handleQueryChange() {
         searchTask?.cancel()
 
         guard !query.trimmingCharacters(in: .whitespaces).isEmpty else {
-            movies = []
-            state = .idle
+            state.movies = []
+            state.uiState = .idle
             return
         }
 
@@ -79,27 +87,26 @@ public class SearchViewModel: BaseViewModel {
         }
     }
 
-    private func search() async {
-        state = .loading
+    func search() async {
+        state.uiState = .loading
         currentPage = 1
         totalPages = 1
 
         do {
             let response = try await movieRepository.searchMovies(query: query, page: 1)
-            movies = mapGenres(response.results)
+            state.movies = mapGenres(response.results)
             currentPage = response.page
             totalPages = response.totalPages
-            state = .idle
+            state.uiState = .idle
         } catch {
             guard !Task.isCancelled else {
                 return
             }
-            let cinelexError = handleError(error)
-            state = .error(cinelexError)
+            state.uiState = .error(error.toCinelexError())
         }
     }
 
-    private func mapGenres(_ movies: [Movie]) -> [Movie] {
+    func mapGenres(_ movies: [Movie]) -> [Movie] {
         movies.map { movie in
             var movie = movie
             movie.genres = genres.filter { movie.genreIds?.contains($0.id) == true }
